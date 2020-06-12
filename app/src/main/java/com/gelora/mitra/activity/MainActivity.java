@@ -1,8 +1,10 @@
-package com.gelora.mitra;
+package com.gelora.mitra.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.gelora.mitra.R;
 
 public class MainActivity extends AppCompatActivity {
 
