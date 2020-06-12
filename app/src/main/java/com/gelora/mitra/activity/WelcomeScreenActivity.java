@@ -25,5 +25,13 @@ Button daftar, masuk;
                 startActivity(intent);
             }
         });
+
+        masuk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(WelcomeScreenActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

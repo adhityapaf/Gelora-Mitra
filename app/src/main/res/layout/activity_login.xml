@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.LoginActivity"
+    android:background="@drawable/welcome_screen_background"
+    >
+    <ImageView
+        android:id="@+id/logoGeloraWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="130dp"
+        android:layout_marginTop="80dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logo_gelora" />
+
+    <TextView
+        android:id="@+id/loginLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logoGeloraWelcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="Login"
+        android:textColor="@color/hitam"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/formLoginRelative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/loginLabel"
+        android:layout_margin="24dp">
+
+        <TextView
+            android:id="@+id/emailMitraLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Email"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/emailMitraField"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/emailMitraLabel"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/text_field_green_stroke_rounded"
+            android:hint="Isikan Email Mitra Anda.."
+            android:inputType="textEmailAddress"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
+
+        <TextView
+            android:id="@+id/passwordMitraLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailMitraField"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="Password"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/passwordMitraField"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/passwordMitraLabel"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/text_field_green_stroke_rounded"
+            android:hint="Isikan Password Mitra Anda.."
+            android:inputType="textPassword"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
+
+        <Button
+            android:id="@+id/loginSubmitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/passwordMitraField"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button_green_rounded"
+            android:elevation="10dp"
+            android:text="Masuk"
+            android:textAllCaps="false"
+            android:textColor="@color/putih"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
