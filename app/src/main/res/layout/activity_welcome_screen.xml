@@ -20,7 +20,7 @@
         android:layout_alignBottom="@id/centerDivider"
         android:layout_marginBottom="60dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/logo_gelora" />
+        android:src="@mipmap/logo_gelora" />
 
     <TextView
         android:id="@+id/haloMitraGelora"
