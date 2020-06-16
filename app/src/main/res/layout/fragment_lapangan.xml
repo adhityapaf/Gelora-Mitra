@@ -53,11 +53,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
-        android:layout_marginTop="24dp
-"
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lapangan"
-        android:layout_centerInParent="true"/>
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+        <EditText
+            android:id="@+id/searchbox_lapangan"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/green_stroke_rectangle"
+            android:hint="Cari Lapangan.."
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:drawableEnd="@drawable/ic_search_black_24dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lapangan_recycler"
+            android:layout_below="@id/searchbox_lapangan"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
 </RelativeLayout>
