@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <Toolbar
         android:id="@+id/toolbar"
@@ -39,37 +41,67 @@
                 android:layout_width="118dp"
                 android:layout_height="76dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginBottom="-60dp"
                 android:layout_marginTop="8dp"
-                android:alpha="0.5"
                 android:layout_marginEnd="-50dp"
+                android:layout_marginBottom="-60dp"
+                android:alpha="0.5"
                 android:rotation="45"
                 android:src="@drawable/ic_lapangan"
                 android:tint="@color/putih" />
         </RelativeLayout>
     </Toolbar>
+
     <RelativeLayout
         android:id="@+id/lapangan_relative"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
-        android:layout_marginTop="24dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="20dp">
+
         <EditText
             android:id="@+id/searchbox_lapangan"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:background="@drawable/green_stroke_rectangle"
+            android:drawableEnd="@drawable/ic_search_black_24dp"
             android:hint="Cari Lapangan.."
             android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:drawableEnd="@drawable/ic_search_black_24dp"/>
+            android:paddingEnd="16dp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/lapangan_recycler"
-            android:layout_below="@id/searchbox_lapangan"
-            android:layout_marginTop="24dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_below="@id/searchbox_lapangan"
+            android:layout_marginTop="24dp" />
     </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/background_fragments"
+        android:layout_marginBottom="-50dp"
+        android:translationZ="-10dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="36dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:src="@drawable/ic_add_black_24dp"
+        android:tint="@color/putih"
+        android:elevation="10dp"
+        app:fabCustomSize="70dp"
+        app:maxImageSize="48dp"
+        app:rippleColor="@android:color/background_dark"
+        android:clickable="true"
+        android:focusable="true"
+        app:borderWidth="0dp" />
 </RelativeLayout>
