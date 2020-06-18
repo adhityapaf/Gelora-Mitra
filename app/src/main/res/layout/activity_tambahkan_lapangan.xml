@@ -1,9 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     tools:context=".activity.TambahkanLapangan">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/back_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back"
+        android:tint="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/tambahkanLapangan_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif-medium"
+        android:text="Tambahkan Lapangan"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp" />
+
+    <ScrollView
+        android:id="@+id/tambahkanLapangan_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tambahkanLapangan_label"
+        android:layout_marginTop="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/namaLapangan_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="Nama Lapangan"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/namaLapangan_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/namaLapangan_label"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/green_stroke_rectangle"
+                android:hint="Nama Lapangan"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:id="@+id/kategoriLapangan_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/namaLapangan_field"
+                android:layout_marginTop="12dp"
+                android:fontFamily="sans-serif"
+                android:text="Kategori Lapangan"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/kategoriLapangan_linear"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/kategoriLapangan_label"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/green_stroke_rectangle">
+
+                <Spinner
+                    android:id="@+id/kategoriLapangan_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:paddingStart="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="8dp"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/jenisLapangan_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/kategoriLapangan_linear"
+                android:layout_marginTop="12dp"
+                android:fontFamily="sans-serif"
+                android:text="Jenis Lapangan"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/jenislapangan_linear"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/jenisLapangan_label"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/green_stroke_rectangle">
+
+                <Spinner
+                    android:id="@+id/jenislapangan_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:paddingStart="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="8dp"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/waktuSewa_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/jenislapangan_linear"
+                android:layout_marginTop="12dp"
+                android:fontFamily="sans-serif"
+                android:text="Waktu Sewa"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/pilihJam_button"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_below="@id/jenislapangan_linear"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_toEndOf="@id/waktuSewa_label"
+                android:background="@drawable/button_green_rounded"
+                android:fontFamily="sans-serif"
+                android:text="Pilih Jam"
+                android:textAllCaps="false"
+                android:textColor="@color/putih" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/waktuSewa_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/waktuSewa_label"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:scrollbars="horizontal" />
+
+            <TextView
+                android:id="@+id/hargaLapangan_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/waktuSewa_recycler"
+                android:fontFamily="sans-serif"
+                android:text="Harga Lapangan"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/Rp_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hargaLapangan_label"
+                android:layout_marginTop="18dp"
+                android:fontFamily="sans-serif"
+                android:text="Rp."
+                android:textColor="@color/hitam"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/hargaLapangan_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hargaLapangan_label"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:layout_toStartOf="@id/jam_label"
+                android:layout_toEndOf="@id/Rp_label"
+                android:background="@drawable/green_stroke_rectangle"
+                android:hint="00.000"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:id="@+id/jam_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hargaLapangan_label"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="18dp"
+                android:fontFamily="sans-serif"
+                android:text="/jam"
+                android:textColor="@color/hitam"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/gambarLapangan_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hargaLapangan_field"
+                android:layout_marginTop="12dp"
+                android:fontFamily="sans-serif"
+                android:text="Gambar Lapangan"
+                android:textColor="@color/hitam"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/pilihGambar_button"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_below="@id/hargaLapangan_field"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_toEndOf="@id/gambarLapangan_label"
+                android:background="@drawable/button_green_rounded"
+                android:text="Pilih Gambar"
+                android:textAllCaps="false"
+                android:textColor="@color/putih" />
+
+            <ImageView
+                android:id="@+id/gambarLapangan_imageview"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_below="@id/gambarLapangan_label"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/simpanLapangan_button"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_below="@id/gambarLapangan_imageview"
+                android:layout_alignParentEnd="true"
+                android:background="@color/colorPrimary"
+                android:text="Simpan"
+                android:textAllCaps="false"
+                android:textColor="@color/putih" />
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
