@@ -35,7 +35,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Lapangan"
                 android:textColor="@color/putih"
-                android:textSize="32dp" />
+                android:textSize="32sp" />
 
             <ImageView
                 android:layout_width="118dp"

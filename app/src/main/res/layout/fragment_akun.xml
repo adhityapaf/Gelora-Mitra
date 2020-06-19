@@ -1,9 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/menuLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="Menu"
+                android:textColor="@color/putih"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/menuTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/menuLabel"
+                android:fontFamily="sans-serif-medium"
+                android:text="Akun"
+                android:textColor="@color/putih"
+                android:textSize="32sp" />
+
+            <ImageView
+                android:layout_width="87dp"
+                android:layout_height="80dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="-10dp"
+                android:alpha="0.5"
+                android:src="@drawable/ic_akun"
+                android:tint="@color/putih" />
+        </RelativeLayout>
+    </Toolbar>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@id/toolbar"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginEnd="20dp"
+    >
+    <RelativeLayout
+        android:id="@+id/akun_relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/editProfil_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Edit Profil"
+            android:textColor="@color/hitam"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/namaMitraEdit_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editProfil_label"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif"
+            android:text="Nama Mitra"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/namaMitraEdit_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/namaMitraEdit_label"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/green_stroke_rectangle"
+            android:hint="Nama Mitramu.."
+            android:paddingStart="18dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="18dp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/emailMitraEdit_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/namaMitraEdit_field"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif"
+            android:text="Email"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/emailMitraEdit_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailMitraEdit_label"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/green_stroke_rectangle"
+            android:hint="Email.."
+            android:inputType="none"
+            android:focusable="false"
+            android:paddingStart="18dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="18dp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/passwordMitraEdit_Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailMitraEdit_field"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif"
+            android:text="Password"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/passwordMitraEdit_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/passwordMitraEdit_Label"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/green_stroke_rectangle"
+            android:hint="Password.."
+            android:inputType="textPassword"
+            android:paddingStart="18dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="18dp"
+            android:paddingBottom="8dp" />
+
+        <Button
+            android:id="@+id/simpanPerubahan_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/passwordMitraEdit_field"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_green_rounded_5dp"
+            android:fontFamily="sans-serif"
+            android:text="Simpan Perubahan"
+            android:textAllCaps="false"
+            android:textColor="@color/putih"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/tentangKami_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/simpanPerubahan_button"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button_blue_rounded"
+            android:fontFamily="sans-serif"
+            android:text="Tentang Kami"
+            android:textAllCaps="false"
+            android:textColor="@color/putih"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tentangKami_button"
+            android:background="@drawable/button_red_rounded"
+            android:fontFamily="sans-serif"
+            android:text="Logout"
+            android:textAllCaps="false"
+            android:textColor="@color/putih"
+            android:textSize="18sp" />
+    </RelativeLayout>
+</ScrollView>
+
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Akun"
-        android:layout_centerInParent="true"/>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-50dp"
+        android:src="@drawable/background_fragments"
+        android:translationZ="-10dp" />
 </RelativeLayout>
