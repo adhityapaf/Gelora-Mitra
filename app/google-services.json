@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "742132588039",
+    "firebase_url": "https://gelora-10879.firebaseio.com",
+    "project_id": "gelora-10879",
+    "storage_bucket": "gelora-10879.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:742132588039:android:3f8226d0160a85099294a2",
+        "android_client_info": {
+          "package_name": "com.gelora.mitra"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "742132588039-57gnvgi7mhj8jquqks8kmnbtvmhtg6b8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOFIrby1PJatrPeXqQgM4tjUuiPUrjVwY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "742132588039-57gnvgi7mhj8jquqks8kmnbtvmhtg6b8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

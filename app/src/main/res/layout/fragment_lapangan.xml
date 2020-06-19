@@ -69,13 +69,19 @@
             android:hint="Cari Lapangan.."
             android:paddingStart="16dp"
             android:paddingEnd="16dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lapangan_recycler"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/searchbox_lapangan"
-            android:layout_marginTop="24dp" />
+            android:layout_marginTop="24dp"
+            android:id="@+id/listLapangan_scroll">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lapangan_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </ScrollView>
+
     </RelativeLayout>
 
     <ImageView

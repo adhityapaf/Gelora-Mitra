@@ -1,9 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/menuLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="Menu"
+                android:textColor="@color/putih"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/menuTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/menuLabel"
+                android:fontFamily="sans-serif-medium"
+                android:text="Pesanan"
+                android:textColor="@color/putih"
+                android:textSize="32dp" />
+
+            <ImageView
+                android:layout_width="118dp"
+                android:layout_height="76dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="-50dp"
+                android:layout_marginBottom="-60dp"
+                android:alpha="0.5"
+                android:rotation="-45"
+                android:src="@drawable/ic_pesanan"
+                android:tint="@color/putih" />
+        </RelativeLayout>
+    </Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/pesanan_relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp">
+
+        <EditText
+            android:id="@+id/searchbox_pesanan"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/green_stroke_rectangle"
+            android:drawableEnd="@drawable/ic_search_black_24dp"
+            android:hint="Cari Pesanan.."
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
+
+        <ScrollView
+            android:id="@+id/listPesanan_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/searchbox_pesanan"
+            android:layout_marginTop="24dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pesanan_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+    </RelativeLayout>
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pesanan"
-        android:layout_centerInParent="true"/>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-50dp"
+        android:src="@drawable/background_fragments"
+        android:translationZ="-10dp" />
 </RelativeLayout>
