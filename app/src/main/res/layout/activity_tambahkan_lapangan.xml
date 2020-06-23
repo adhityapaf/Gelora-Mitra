@@ -144,6 +144,17 @@
                 android:textAllCaps="false"
                 android:textColor="@color/putih" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/pilihJam_button"
+                android:text="Jam pilihanmu"
+                android:layout_below="@id/jenislapangan_linear"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:id="@+id/jamPilihanText"
+                />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/waktuSewa_recycler"
                 android:layout_width="match_parent"
