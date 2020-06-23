@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "742132588039-ldeiqaub4afd4pgm76otbisu2402ue9a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gelora.mitra",
+            "certificate_hash": "c7017405bc5ccbe9ff1f960ebd0c5d93986f2d4b"
+          }
+        },
+        {
           "client_id": "742132588039-57gnvgi7mhj8jquqks8kmnbtvmhtg6b8.apps.googleusercontent.com",
           "client_type": 3
         }
