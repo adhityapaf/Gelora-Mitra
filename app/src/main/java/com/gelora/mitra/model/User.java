@@ -1,9 +1,9 @@
 package com.gelora.mitra.model;
 
 public class User {
-    private String namaMitra;
-    private String emailMitra;
-    private String passwordMitra;
+    private String nama;
+    private String email;
+    private String password;
     private String role;
 
     public String getRole() {
@@ -18,34 +18,34 @@ public class User {
 
     }
 
-    public User(String namaMitra, String emailMitra, String passwordMitra, String role) {
-        this.namaMitra = namaMitra;
-        this.emailMitra = emailMitra;
-        this.passwordMitra = passwordMitra;
+    public User(String nama, String email, String password, String role) {
+        this.nama = nama;
+        this.email = email;
+        this.password = password;
         this.role = role;
     }
 
-    public String getNamaMitra() {
-        return namaMitra;
+    public String getNama() {
+        return nama;
     }
 
-    public void setNamaMitra(String namaMitra) {
-        this.namaMitra = namaMitra;
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
-    public String getEmailMitra() {
-        return emailMitra;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailMitra(String emailMitra) {
-        this.emailMitra = emailMitra;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPasswordMitra() {
-        return passwordMitra;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordMitra(String passwordMitra) {
-        this.passwordMitra = passwordMitra;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

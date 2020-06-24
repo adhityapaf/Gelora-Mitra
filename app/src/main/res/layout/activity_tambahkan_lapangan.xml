@@ -153,6 +153,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
                 android:id="@+id/jamPilihanText"
+                android:visibility="gone"
                 />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -162,7 +163,7 @@
                 android:layout_below="@id/waktuSewa_label"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
-                android:scrollbars="horizontal" />
+                android:orientation="horizontal"/>
 
             <TextView
                 android:id="@+id/hargaLapangan_label"
@@ -196,11 +197,13 @@
                 android:layout_toStartOf="@id/jam_label"
                 android:layout_toEndOf="@id/Rp_label"
                 android:background="@drawable/green_stroke_rectangle"
-                android:hint="00.000"
+                android:hint="100000"
                 android:paddingStart="12dp"
                 android:paddingTop="8dp"
                 android:paddingEnd="12dp"
-                android:paddingBottom="8dp" />
+                android:paddingBottom="8dp"
+                android:inputType="number"
+                />
 
             <TextView
                 android:id="@+id/jam_label"
@@ -241,7 +244,7 @@
             <ImageView
                 android:id="@+id/gambarLapangan_imageview"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/gambarLapangan_label"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="30dp"

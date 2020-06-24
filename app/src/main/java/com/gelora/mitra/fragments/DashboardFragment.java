@@ -43,7 +43,7 @@ public class DashboardFragment extends Fragment {
     private void loadUserInformation(){
         FirebaseUser user = firebaseAuth.getCurrentUser();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
-        DatabaseReference naamRef = databaseReference.child("namaMitra");
+        DatabaseReference naamRef = databaseReference.child("nama");
         if (user!=null){
             if (naamRef.getKey() != null){
                 naamRef.addValueEventListener(new ValueEventListener() {
