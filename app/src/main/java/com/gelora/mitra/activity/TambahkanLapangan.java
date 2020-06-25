@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.gelora.mitra.R;
 import com.gelora.mitra.adapter.JamLapanganAdapter;
+import com.gelora.mitra.fragments.LapanganFragment;
 import com.gelora.mitra.fragments.TimePickerFragment;
 import com.gelora.mitra.model.LapanganData;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -207,6 +208,7 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
                                         }
                                         Log.d(TAG, "onSuccess: Success Upload");
                                         Toast.makeText(TambahkanLapangan.this, "Tambahkan Lapangan Berhasil!", Toast.LENGTH_SHORT).show();
+                                        finish();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
