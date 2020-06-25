@@ -108,7 +108,8 @@
                 android:layout_below="@id/jam_lapangan_label"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="18dp"
-                android:scrollbars="horizontal" />
+                android:orientation="horizontal"
+                />
 
             <Button
                 android:id="@+id/edit_lapangan_button"

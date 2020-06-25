@@ -3,16 +3,17 @@ package com.gelora.mitra.model;
 import com.gelora.mitra.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LapanganData {
     private String nama_lapangan;
     private String gambar_lapangan;
-    private int harga;
+    private long harga;
     private String kategori_lapangan;
     private String jenis_lapangan;
     private String UID_Mitra;
 
-    public void lapanganData(){
+    public LapanganData(){
 
     }
     public String getNama_lapangan() {
@@ -31,11 +32,11 @@ public class LapanganData {
         this.gambar_lapangan = gambar_lapangan;
     }
 
-    public int getHarga() {
+    public long getHarga() {
         return harga;
     }
 
-    public void setHarga(int harga) {
+    public void setHarga(long harga) {
         this.harga = harga;
     }
 
@@ -64,7 +65,7 @@ public class LapanganData {
     }
 
 
-    public LapanganData(String nama_lapangan, String gambar_lapangan, int harga, String kategori_lapangan, String jenis_lapangan, String UID_Mitra) {
+    public LapanganData(String nama_lapangan, String gambar_lapangan, long harga, String kategori_lapangan, String jenis_lapangan, String UID_Mitra) {
         this.nama_lapangan = nama_lapangan;
         this.gambar_lapangan = gambar_lapangan;
         this.harga = harga;

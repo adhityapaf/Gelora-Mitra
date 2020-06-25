@@ -35,6 +35,7 @@ import com.gelora.mitra.adapter.JamLapanganAdapter;
 import com.gelora.mitra.fragments.LapanganFragment;
 import com.gelora.mitra.fragments.TimePickerFragment;
 import com.gelora.mitra.model.LapanganData;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -161,7 +162,7 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
                     //
                     if (mImageUri != null){
                         mProgressBar.setVisibility(View.VISIBLE);
-                        mStorageRef = FirebaseStorage.getInstance().getReference("foto_lapangan").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(String.valueOf(counterLapangan));
+                        mStorageRef = FirebaseStorage.getInstance().getReference("foto_lapangan").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("id_lapangan").child(String.valueOf(counterLapangan));
                         final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()+ "." + getFileExtension(mImageUri));
                         mUploadTask = fileReference.putFile(mImageUri)
                                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -174,7 +175,15 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
                                                 mProgressBar.setProgress(0);
                                             }
                                         }, 2000);
-                                        imageDownloadUrl = fileReference.getDownloadUrl().toString();
+                                        Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                String downloadUil = uri.toString();
+                                                imageDownloadUrl = downloadUil;
+
+                                            }
+                                        });
                                         kategoriPilihan = kategoriSpinner.getSelectedItem().toString();
                                         jenisPilihan = jenisSpinner.getSelectedItem().toString();
                                         String namaLapanganString = namaLapangan.getText().toString();
@@ -186,8 +195,8 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
                                         counterTotalLapangan++;
                                         lapanganCounter.setValue(counterLapangan);
                                         totalRef.setValue(counterTotalLapangan);
-                                        DatabaseReference lapanganRefId = lapanganRef.child(String.valueOf(counterLapangan));
-                                        DatabaseReference pemilikLapanganRefID = pemilikLapanganRef.child(String.valueOf(counterLapangan));
+                                        DatabaseReference lapanganRefId = lapanganRef.child("id_lapangan").child(String.valueOf(counterLapangan));
+                                        DatabaseReference pemilikLapanganRefID = pemilikLapanganRef.child("id_lapangan").child(String.valueOf(counterLapangan));
                                         String gambarImageString = imageDownloadUrl;
                                         //
                                         LapanganData lapanganData = new LapanganData(
@@ -201,7 +210,7 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
                                         lapanganRefId.setValue(lapanganData);
                                         pemilikLapanganRefID.setValue(lapanganData);
                                         DatabaseReference jamRef = FirebaseDatabase.getInstance().getReference("lapangan").child(String.valueOf(counterLapangan)).child("jam_sewa");
-                                        DatabaseReference jamPemilikRef = pemilikLapanganRef.child(String.valueOf(counterLapangan)).child("jam_sewa");
+                                        DatabaseReference jamPemilikRef = pemilikLapanganRef.child("id_lapangan").child(String.valueOf(counterLapangan)).child("jam_sewa");
                                         for (int i = 0; i < stringArrayList.size(); i++) {
                                             jamRef.child(stringArrayList.get(i)).setValue("tersedia");
                                             jamPemilikRef.child(stringArrayList.get(i)).setValue("tersedia");
