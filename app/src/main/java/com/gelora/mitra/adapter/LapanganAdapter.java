@@ -46,7 +46,8 @@ public class LapanganAdapter extends RecyclerView.Adapter<LapanganAdapter.ViewHo
         holder.namaLapangan.setText(lapanganData.get(position).getNama_lapangan());
         holder.kategoriLapangan.setText(lapanganData.get(position).getKategori_lapangan());
         holder.jenisLapangan.setText(lapanganData.get(position).getJenis_lapangan());
-
+        String bilanganHarga = String.valueOf(lapanganData.get(position).getHarga());
+        holder.hargaSewa.setText("Rp. "+bilanganHarga);
     }
 
     @Override

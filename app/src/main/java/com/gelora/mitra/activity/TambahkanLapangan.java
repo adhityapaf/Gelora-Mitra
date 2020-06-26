@@ -161,8 +161,12 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
 
                     //
                     if (mImageUri != null){
+                        counterLapangan++;
+                        counterTotalLapangan++;
                         mProgressBar.setVisibility(View.VISIBLE);
                         mStorageRef = FirebaseStorage.getInstance().getReference("foto_lapangan").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("id_lapangan").child(String.valueOf(counterLapangan));
+                        mDatabaseRef = FirebaseDatabase.getInstance().getReference("lapangan").child("id_lapangan").child(String.valueOf(counterLapangan)).child("gambar_lapangan");
+                        final DatabaseReference mDatabaseRef2 = FirebaseDatabase.getInstance().getReference("pemilik_lapangan").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("id_lapangan").child(String.valueOf(counterLapangan)).child("gambar_lapangan");
                         final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()+ "." + getFileExtension(mImageUri));
                         mUploadTask = fileReference.putFile(mImageUri)
                                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -180,7 +184,8 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
                                             @Override
                                             public void onSuccess(Uri uri) {
                                                 String downloadUil = uri.toString();
-                                                imageDownloadUrl = downloadUil;
+                                                mDatabaseRef.setValue(downloadUil);
+                                                mDatabaseRef2.setValue(downloadUil);
 
                                             }
                                         });
@@ -191,8 +196,7 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
                                         jenisPilihan = jenisSpinner.getSelectedItem().toString();
                                         int hargaLapanganInt = Integer.parseInt(hargaLapangan.getText().toString());
                                         String UIDMitra = FirebaseAuth.getInstance().getUid();
-                                        counterLapangan++;
-                                        counterTotalLapangan++;
+
                                         lapanganCounter.setValue(counterLapangan);
                                         totalRef.setValue(counterTotalLapangan);
                                         DatabaseReference lapanganRefId = lapanganRef.child("id_lapangan").child(String.valueOf(counterLapangan));
@@ -209,7 +213,7 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
                                         );
                                         lapanganRefId.setValue(lapanganData);
                                         pemilikLapanganRefID.setValue(lapanganData);
-                                        DatabaseReference jamRef = FirebaseDatabase.getInstance().getReference("lapangan").child(String.valueOf(counterLapangan)).child("jam_sewa");
+                                        DatabaseReference jamRef = FirebaseDatabase.getInstance().getReference("lapangan").child("id_lapangan").child(String.valueOf(counterLapangan)).child("jam_sewa");
                                         DatabaseReference jamPemilikRef = pemilikLapanganRef.child("id_lapangan").child(String.valueOf(counterLapangan)).child("jam_sewa");
                                         for (int i = 0; i < stringArrayList.size(); i++) {
                                             jamRef.child(stringArrayList.get(i)).setValue("tersedia");
