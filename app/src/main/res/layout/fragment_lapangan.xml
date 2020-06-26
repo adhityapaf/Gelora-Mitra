@@ -67,6 +67,7 @@
             android:layout_height="42dp"
             android:background="@drawable/green_stroke_rectangle"
             android:drawableEnd="@drawable/ic_search_black_24dp"
+            android:fontFamily="sans-serif-light"
             android:hint="Cari Lapangan.."
             android:paddingStart="16dp"
             android:paddingEnd="16dp" />

@@ -93,7 +93,8 @@
             android:paddingStart="18dp"
             android:paddingTop="8dp"
             android:paddingEnd="18dp"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="8dp"
+            />
 
         <TextView
             android:id="@+id/emailMitraEdit_label"

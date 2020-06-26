@@ -1,5 +1,7 @@
 package com.gelora.mitra.fragments;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.gelora.mitra.R;
+import com.gelora.mitra.dialogs.LoadingDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +26,7 @@ public class DashboardFragment extends Fragment {
 
     TextView namaMitra, penghasilanText, lapanganText, pesananText;
     FirebaseAuth firebaseAuth;
+    LoadingDialog loadingDialog1;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,9 +37,11 @@ public class DashboardFragment extends Fragment {
         lapanganText = v.findViewById(R.id.lapangan_amount);
         pesananText = v.findViewById(R.id.totalPesanan_amount);
         namaMitra.setText("");
-        penghasilanText.setText("Loading..");
-        pesananText.setText("Loading..");
-        lapanganText.setText("Loading..");
+        penghasilanText.setText("");
+        pesananText.setText("");
+        lapanganText.setText("");
+        loadingDialog1 = new LoadingDialog(getActivity());
+        loadingDialog1.startLoadingDialog();
         loadUserInformation();
         return v;
     }
@@ -50,6 +56,7 @@ public class DashboardFragment extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         namaMitra.setText(snapshot.getValue().toString());
+                        loadingDialog1.dissmissDialog();
                     }
 
                     @Override
@@ -61,5 +68,23 @@ public class DashboardFragment extends Fragment {
                 namaMitra.setText("Gagal Fetch");
             }
         }
+        DatabaseReference totalLapanganRef =  FirebaseDatabase.getInstance().getReference("pemilik_lapangan").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("total_lapangan");
+        totalLapanganRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    lapanganText.setText(snapshot.getValue().toString());
+
+                } else {
+                    lapanganText.setText("0");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        totalLapanganRef.keepSynced(true);
     }
 }
