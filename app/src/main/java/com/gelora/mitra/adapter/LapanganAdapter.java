@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,12 +18,16 @@ import com.gelora.mitra.model.LapanganData;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 public class LapanganAdapter extends RecyclerView.Adapter<LapanganAdapter.ViewHolder> {
 
     ArrayList<LapanganData> lapanganData;
     Context mContext;
     DatabaseReference ref;
+    HashMap<String, String> hashMap = new HashMap<String,String>();
+    ArrayList<String> jamSewaArrayList;
 
     public LapanganAdapter(ArrayList<LapanganData> lapanganData, Context mContext ) {
         this.lapanganData = lapanganData;
@@ -48,6 +53,15 @@ public class LapanganAdapter extends RecyclerView.Adapter<LapanganAdapter.ViewHo
         holder.jenisLapangan.setText(lapanganData.get(position).getJenis_lapangan());
         String bilanganHarga = String.valueOf(lapanganData.get(position).getHarga());
         holder.hargaSewa.setText("Rp. "+bilanganHarga);
+        hashMap = lapanganData.get(position).getJam_sewa();
+        Set<String> jamKeySet = hashMap.keySet();
+        jamSewaArrayList = new ArrayList<>(jamKeySet);
+        System.out.println(jamSewaArrayList);
+        holder.jamSewaRecycler.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
+        holder.jamSewaRecycler.setLayoutManager(layoutManager);
+        JamSewaAdapter jamSewaAdapter = new JamSewaAdapter(jamSewaArrayList, mContext);
+        holder.jamSewaRecycler.setAdapter(jamSewaAdapter);
     }
 
     @Override

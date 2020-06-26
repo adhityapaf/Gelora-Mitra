@@ -3,6 +3,7 @@ package com.gelora.mitra.model;
 import com.gelora.mitra.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class LapanganData {
@@ -12,6 +13,15 @@ public class LapanganData {
     private String kategori_lapangan;
     private String jenis_lapangan;
     private String UID_Mitra;
+    HashMap<String,String> jam_sewa;
+
+    public HashMap<String, String> getJam_sewa() {
+        return jam_sewa;
+    }
+
+    public void setJam_sewa(HashMap<String, String> jam_sewa) {
+        this.jam_sewa = jam_sewa;
+    }
 
     public LapanganData(){
 

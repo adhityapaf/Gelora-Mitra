@@ -107,31 +107,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/jam_lapangan_label"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="18dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
                 android:orientation="horizontal"
                 />
-
-            <Button
-                android:id="@+id/edit_lapangan_button"
-                android:layout_width="wrap_content"
-                android:layout_height="18pt"
-                android:layout_below="@id/jam_lapangan_recycler"
-                android:backgroundTint="@color/biru"
-                android:text="Edit"
-                android:textAllCaps="false"
-                android:textColor="@color/putih"
-                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/hapus_lapangan_button"
                 android:layout_width="wrap_content"
                 android:layout_height="18pt"
                 android:layout_below="@id/jam_lapangan_recycler"
-                android:layout_marginEnd="4dp"
-                android:layout_toEndOf="@id/edit_lapangan_button"
                 android:backgroundTint="@color/merah"
                 android:text="Hapus"
+                android:textAllCaps="false"
+                android:textColor="@color/putih"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/edit_lapangan_button"
+                android:layout_width="wrap_content"
+                android:layout_height="18pt"
+                android:layout_below="@id/jam_lapangan_recycler"
+                android:layout_marginEnd="4dp"
+                android:layout_toEndOf="@id/hapus_lapangan_button"
+                android:backgroundTint="@color/biru"
+                android:text="Edit"
                 android:textAllCaps="false"
                 android:textColor="@color/putih"
                 android:textSize="14sp" />
