@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/menuLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="Menu"
+                android:textColor="@color/putih"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/menuTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/menuLabel"
+                android:fontFamily="sans-serif-medium"
+                android:text="Tentang Kami"
+                android:textColor="@color/putih"
+                android:textSize="32sp" />
+
+            <ImageView
+                android:layout_width="87dp"
+                android:layout_height="80dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="-10dp"
+                android:alpha="0.5"
+                android:src="@drawable/ic_akun"
+                android:tint="@color/putih" />
+        </RelativeLayout>
+    </Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/tentangKami_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="50dp">
+
+        <TextView
+            android:id="@+id/gelora_title_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif"
+            android:text="Gelora"
+            android:textColor="@color/hitam"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/gelanggang_olahraga_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gelora_title_label"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-light"
+            android:text="Gelanggang Olahraga"
+            android:textColor="@color/hitam"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/gelora_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gelanggang_olahraga_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/gelora_desc"
+            android:textColor="@color/hitam"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:id="@+id/dev1_card"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_below="@id/gelora_desc"
+            android:background="@color/colorPrimary">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/dev1_avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/avatar_adhit" />
+
+            <TextView
+                android:id="@+id/dev1_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@id/dev1_avatar"
+                android:fontFamily="sans-serif"
+                android:text="Adhitya Kusumadinatha"
+                android:textColor="@color/putih"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/dev1_jobpos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dev1_name"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@id/dev1_avatar"
+                android:fontFamily="sans-serif"
+                android:text="Android Developer"
+                android:textColor="@color/putih"
+                android:textSize="14sp" />
+            
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_instagram_sketched"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="48dp"
+                android:id="@+id/instagram_icon"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/fui_ic_github_white_24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="18dp"
+                android:id="@+id/github_icon"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/dev2_card"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_below="@id/dev1_card"
+            android:background="@color/colorPrimary">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/dev2_avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/avatar_bagus" />
+
+            <TextView
+                android:id="@+id/dev2_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@id/dev2_avatar"
+                android:fontFamily="sans-serif"
+                android:text="Bagus Prasetyawan"
+                android:textColor="@color/putih"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/dev2_jobpos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dev2_name"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@id/dev2_avatar"
+                android:fontFamily="sans-serif"
+                android:text="UI / UX Designer"
+                android:textColor="@color/putih"
+                android:textSize="14sp" />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_instagram_sketched"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="30dp"
+                android:id="@+id/instagram_icon2"/>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/kembali_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/button_blue_rounded"
+            android:fontFamily="sans-serif"
+            android:text="Kembali"
+            android:textAllCaps="false"
+            android:textColor="@color/putih"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</RelativeLayout>

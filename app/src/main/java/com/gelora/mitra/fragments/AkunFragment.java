@@ -3,6 +3,7 @@ package com.gelora.mitra.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class AkunFragment extends Fragment {
+    private static final String TAG = "AkunFragment";
     Button logout, simpanPerubahan, tentangKami;
     EditText namaMitra, emailMitra, passwordMitra;
     DatabaseReference userRef;
@@ -70,6 +72,17 @@ public class AkunFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), SplashScreen.class);
                 startActivity(intent);
                 getActivity().finishAffinity();
+            }
+        });
+        tentangKami.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TentangKami tentangKami = new TentangKami();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, tentangKami, "FindTetangKami")
+                        .addToBackStack(null)
+                        .commit();
+                Log.d(TAG, "onClick: Success");
             }
         });
         return view;
