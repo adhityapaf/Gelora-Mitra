@@ -55,9 +55,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="-4dp">
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp">
 
         <TextView
             android:id="@+id/gelora_title_label"
@@ -141,7 +141,7 @@
                 android:layout_height="70dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="8dp"
                 android:src="@drawable/ic_linktree_rounded" />
         </RelativeLayout>
 
