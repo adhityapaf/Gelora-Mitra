@@ -122,6 +122,7 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
             @Override
             public void onClick(View v) {
                 openFileChooser();
+                mProgressBar.setVisibility(View.VISIBLE);
             }
         });
 
@@ -330,11 +331,13 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
     // Mengambil data dari TimePicker
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        TextView jampilihan;
-        jampilihan = findViewById(R.id.jamPilihanText);
-        jampilihan.setVisibility(View.GONE);
-        jampilihan.setText(hourOfDay + ":" + minute);
-        stringArrayList.add(jampilihan.getText().toString());
+        String pilihanJam;
+        if (minute<10){
+            pilihanJam = hourOfDay + ":0" +minute;
+        } else {
+            pilihanJam = hourOfDay + ":" +minute;
+        }
+        stringArrayList.add(pilihanJam);
         initRecyclerView();
         Log.d("TimePicker", "onTimeSet: " + stringArrayList.size() + "Isi : " + stringArrayList.get(stringArrayList.size() - 1));
     }

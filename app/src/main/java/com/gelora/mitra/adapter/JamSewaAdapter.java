@@ -27,7 +27,7 @@ public class JamSewaAdapter extends RecyclerView.Adapter<JamSewaAdapter.ViewHold
     @NonNull
     @Override
     public JamSewaAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.jam_lapangan_items, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.jam_lapangan_items_card, parent, false);
         return new JamSewaAdapter.ViewHolder(view);
     }
 
