@@ -52,10 +52,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="50dp">
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="-4dp">
 
         <TextView
             android:id="@+id/gelora_title_label"
@@ -102,8 +104,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/dev1_avatar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="12dp"
@@ -113,7 +115,7 @@
                 android:id="@+id/dev1_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="16dp"
                 android:layout_toEndOf="@id/dev1_avatar"
                 android:fontFamily="sans-serif"
@@ -126,30 +128,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/dev1_name"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/dev1_avatar"
                 android:fontFamily="sans-serif"
                 android:text="Android Developer"
                 android:textColor="@color/putih"
                 android:textSize="14sp" />
-            
+
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_instagram_sketched"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="48dp"
-                android:id="@+id/instagram_icon"/>
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/fui_ic_github_white_24dp"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="18dp"
                 android:id="@+id/github_icon"
-                />
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_linktree_rounded" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -161,8 +154,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/dev2_avatar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="12dp"
@@ -172,7 +165,7 @@
                 android:id="@+id/dev2_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="16dp"
                 android:layout_toEndOf="@id/dev2_avatar"
                 android:fontFamily="sans-serif"
@@ -185,20 +178,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/dev2_name"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/dev2_avatar"
                 android:fontFamily="sans-serif"
                 android:text="UI / UX Designer"
                 android:textColor="@color/putih"
                 android:textSize="14sp" />
+
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:id="@+id/instagram_icon2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_instagram_sketched"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="30dp"
-                android:id="@+id/instagram_icon2"/>
+                android:layout_marginEnd="32dp"
+                android:src="@drawable/ic_instagram_sketched" />
         </RelativeLayout>
 
         <Button

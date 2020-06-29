@@ -20,13 +20,12 @@ import com.gelora.mitra.R;
 
 public class TentangKami extends Fragment {
     private static final String TAG = "TentangKami";
-    ImageView instagramAdhit, instagramBagus, githubAdhit;
+    ImageView  instagramBagus, githubAdhit;
     Button kembaliButton;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tentang_kami, container, false);
-        instagramAdhit = view.findViewById(R.id.instagram_icon);
         instagramBagus = view.findViewById(R.id.instagram_icon2);
         githubAdhit = view.findViewById(R.id.github_icon);
         kembaliButton = view.findViewById(R.id.kembali_button);
@@ -41,14 +40,6 @@ public class TentangKami extends Fragment {
                 Log.d(TAG, "onClick: Success");
             }
         });
-        instagramAdhit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse("http://www.instagram.com/adhityapaf"); // missing 'http://' will cause crashed
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            }
-        });
         instagramBagus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +51,7 @@ public class TentangKami extends Fragment {
         githubAdhit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri = Uri.parse("http://www.github.com/adhityapaf"); // missing 'http://' will cause crashed
+                Uri uri = Uri.parse("https://linktr.ee/adhityakusumadinatha"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
