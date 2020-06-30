@@ -41,11 +41,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="60dp"
         android:layout_marginTop="60dp"
-        android:background="@drawable/button_green_rounded"
+        android:background="@drawable/button_green_rounded_5dp"
         android:text="Daftar Mitra"
         android:textAllCaps="false"
         android:textColor="@color/putih"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <Button
@@ -56,12 +56,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="60dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/button_green_rounded"
+        android:background="@drawable/button_green_rounded_stroke_5dp"
         android:text="Masuk Mitra"
         android:textAllCaps="false"
-        android:textColor="@color/putih"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+         />
 
 
 </RelativeLayout>

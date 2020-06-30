@@ -38,10 +38,9 @@
             android:id="@+id/emailMitraLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
             android:text="Email"
             android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <EditText
@@ -50,7 +49,7 @@
             android:layout_height="50dp"
             android:layout_below="@id/emailMitraLabel"
             android:layout_marginTop="8dp"
-            android:background="@drawable/text_field_green_stroke_rounded"
+            android:background="@drawable/green_stroke_rectangle"
             android:hint="Isikan Email Mitra Anda.."
             android:inputType="textEmailAddress"
             android:paddingStart="12dp"
@@ -61,11 +60,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/emailMitraField"
-            android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:text="Password"
             android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <EditText
@@ -74,7 +72,7 @@
             android:layout_height="50dp"
             android:layout_below="@id/passwordMitraLabel"
             android:layout_marginTop="8dp"
-            android:background="@drawable/text_field_green_stroke_rounded"
+            android:background="@drawable/green_stroke_rectangle"
             android:hint="Isikan Password Mitra Anda.."
             android:inputType="textPassword"
             android:paddingStart="12dp"
@@ -84,9 +82,10 @@
             android:id="@+id/loginSubmitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/passwordMitraField"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
             android:layout_marginTop="24dp"
-            android:background="@drawable/button_green_rounded"
+            android:background="@drawable/button_green_rounded_5dp"
             android:elevation="10dp"
             android:text="Masuk"
             android:textAllCaps="false"

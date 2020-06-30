@@ -29,7 +29,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Tambahkan Lapangan"
                 android:textColor="@color/colorPrimary"
-                android:textSize="24sp" />
+                android:textSize="20sp" />
         </androidx.cardview.widget.CardView>
 
     <RelativeLayout
@@ -69,7 +69,6 @@
                     android:paddingTop="8dp"
                     android:paddingEnd="12dp"
                     android:paddingBottom="8dp"
-                    android:textSize="14sp"
                     />
 
                 <TextView
@@ -262,6 +261,7 @@
                     android:layout_toEndOf="@id/gambarLapangan_label"
                     android:background="@drawable/button_blue_rounded"
                     android:text="Pilih Gambar"
+                    android:shadowColor="@color/putih"
                     android:textAllCaps="false"
                     android:textColor="@color/putih" />
 
