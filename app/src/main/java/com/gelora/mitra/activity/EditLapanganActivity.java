@@ -13,9 +13,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -25,17 +23,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.gelora.mitra.R;
 import com.gelora.mitra.adapter.JamLapanganAdapter;
-import com.gelora.mitra.fragments.LapanganFragment;
 import com.gelora.mitra.fragments.TimePickerFragment;
 import com.gelora.mitra.model.LapanganData;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -51,15 +46,19 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
-public class TambahkanLapangan extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
+import static com.gelora.mitra.adapter.LapanganAdapter.GAMBAR_LAPANGAN;
+import static com.gelora.mitra.adapter.LapanganAdapter.HARGA_LAPANGAN;
+import static com.gelora.mitra.adapter.LapanganAdapter.ID_LAPANGAN;
+import static com.gelora.mitra.adapter.LapanganAdapter.JENIS_LAPANGAN;
+import static com.gelora.mitra.adapter.LapanganAdapter.KATEGORI_LAPANGAN;
+import static com.gelora.mitra.adapter.LapanganAdapter.NAMA_LAPANGAN;
+import static com.gelora.mitra.adapter.LapanganAdapter.WAKTU_SEWA;
+
+public class EditLapanganActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
     private static final int PICK_IMAGE_REQUEST = 1;
-    private static final String TAG = "TambahkanLapangan";
+    private static final String TAG = "EditLapanganActivity";
     private Uri mImageUri;
     private ProgressBar mProgressBar;
     ImageView backButton, gambarLapangan;
@@ -77,17 +76,30 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
     StorageReference mStorageRef;
     DatabaseReference mDatabaseRef;
     String imageDownloadUrl= "";
+    String idLapanganIntent, namaLapanganIntent, kategoriLapanganIntent, jenisLapanganIntent, hargaLapanganIntent, gambarLapanganIntent;
+    ArrayList<String> waktuSewaIntent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tambahkan_lapangan);
+        setContentView(R.layout.activity_edit_lapangan);
         lapanganRef = FirebaseDatabase.getInstance().getReference("lapangan");
         pemilikLapanganRef = FirebaseDatabase.getInstance().getReference().child("pemilik_lapangan").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         totalRef = pemilikLapanganRef.child("total_lapangan");
         lapanganCounter = FirebaseDatabase.getInstance().getReference().child("lapangan").child("lapangan_counter");
         kategoriRef = FirebaseDatabase.getInstance().getReference().child("kategori_lapangan");
         jenisRef = FirebaseDatabase.getInstance().getReference().child("jenis_lapangan");
+        //
+        Intent intent = getIntent();
+        idLapanganIntent = intent.getStringExtra(ID_LAPANGAN);
+        namaLapanganIntent = intent.getStringExtra(NAMA_LAPANGAN);
+        kategoriLapanganIntent = intent.getStringExtra(KATEGORI_LAPANGAN);
+        jenisLapanganIntent = intent.getStringExtra(JENIS_LAPANGAN);
+        waktuSewaIntent = intent.getStringArrayListExtra(WAKTU_SEWA);
+        hargaLapanganIntent = intent.getStringExtra(HARGA_LAPANGAN);
+        gambarLapanganIntent = intent.getStringExtra(GAMBAR_LAPANGAN);
+        //
         namaLapangan = findViewById(R.id.namaLapangan_field);
         kategoriSpinner = findViewById(R.id.kategoriLapangan_spinner);
         jenisSpinner = findViewById(R.id.jenislapangan_spinner);
@@ -104,6 +116,20 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
         readData();
         populateSpinner();
 
+        // set data dari intent
+        namaLapangan.setText(namaLapanganIntent);
+        // spinner udh keselect di populatespinner
+        stringArrayList.clear();
+        stringArrayList.addAll(waktuSewaIntent);
+        initRecyclerView();
+        hargaLapangan.setText(hargaLapanganIntent);
+        Glide.with(this)
+                .load(gambarLapanganIntent)
+                .centerCrop()
+                .placeholder(R.drawable.background_fragments)
+                .into(gambarLapangan);
+
+        //
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,30 +166,28 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
                 }
 
                 if (kategoriSpinner.getSelectedItem().equals("--Pilih Kategori--")) {
-                    Toast.makeText(TambahkanLapangan.this, "Silakan Pilih Kategori Lapangan", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditLapanganActivity.this, "Silakan Pilih Kategori Lapangan", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (jenisSpinner.getSelectedItem().equals("--Pilih Kategori--")) {
-                    Toast.makeText(TambahkanLapangan.this, "Silakan Pilih Jenis Lapangan", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditLapanganActivity.this, "Silakan Pilih Jenis Lapangan", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (stringArrayList.size() == 0) {
-                    Toast.makeText(TambahkanLapangan.this, "Silakan isi Waktu Sewa Lapangan", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditLapanganActivity.this, "Silakan isi Waktu Sewa Lapangan", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!gambarLapangan.isShown()) {
-                    Toast.makeText(TambahkanLapangan.this, "Silakan Pilih Gambar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditLapanganActivity.this, "Silakan Pilih Gambar", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(TambahkanLapangan.this, "Proses Upload sedang berlangsung, mohon ditunggu.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditLapanganActivity.this, "Proses Upload sedang berlangsung, mohon ditunggu.", Toast.LENGTH_SHORT).show();
                 } else {
 
                     //
                     if (mImageUri != null){
-                        counterLapangan++;
-                        counterTotalLapangan++;
                         mProgressBar.setVisibility(View.VISIBLE);
                         mStorageRef = FirebaseStorage.getInstance().getReference("foto_lapangan").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("id_lapangan").child(String.valueOf(counterLapangan));
                         mDatabaseRef = FirebaseDatabase.getInstance().getReference("lapangan").child("id_lapangan").child(String.valueOf(counterLapangan)).child("gambar_lapangan");
@@ -222,14 +246,14 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
                                             jamPemilikRef.child(stringArrayList.get(i)).setValue("tersedia");
                                         }
                                         Log.d(TAG, "onSuccess: Success Upload");
-                                        Toast.makeText(TambahkanLapangan.this, "Tambahkan Lapangan Berhasil!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(EditLapanganActivity.this, "Tambahkan Lapangan Berhasil!", Toast.LENGTH_SHORT).show();
                                         finish();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(TambahkanLapangan.this, "Ups Terjadi Kesalahan : "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(EditLapanganActivity.this, "Ups Terjadi Kesalahan : "+e.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 })
                                 .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -240,7 +264,7 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
                                     }
                                 });
                     } else {
-                        Toast.makeText(TambahkanLapangan.this, "Anda Belum Memilih Gambar", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditLapanganActivity.this, "Anda Belum Memilih Gambar", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -324,9 +348,11 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
         adapterJenis.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         if (kategoriSpinner != null) {
             kategoriSpinner.setAdapter(adapterKategori);
+            kategoriSpinner.setSelection(adapterKategori.getPosition(kategoriLapanganIntent));
         }
         if (jenisSpinner != null) {
             jenisSpinner.setAdapter(adapterJenis);
+            jenisSpinner.setSelection(adapterJenis.getPosition(jenisLapanganIntent));
         }
     }
 
@@ -377,9 +403,5 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(contentResolver.getType(uri));
-    }
-
-    private void uploadFile(){
-
     }
 }

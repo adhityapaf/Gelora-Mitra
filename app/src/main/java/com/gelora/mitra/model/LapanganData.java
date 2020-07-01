@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class LapanganData {
+    private String id_lapangan;
     private String nama_lapangan;
     private String gambar_lapangan;
     private long harga;
@@ -14,6 +15,14 @@ public class LapanganData {
     private String jenis_lapangan;
     private String UID_Mitra;
     HashMap<String,String> jam_sewa;
+
+    public String getId_lapangan() {
+        return id_lapangan;
+    }
+
+    public void setId_lapangan(String id_lapangan) {
+        this.id_lapangan = id_lapangan;
+    }
 
     public HashMap<String, String> getJam_sewa() {
         return jam_sewa;
@@ -75,7 +84,8 @@ public class LapanganData {
     }
 
 
-    public LapanganData(String nama_lapangan, String gambar_lapangan, long harga, String kategori_lapangan, String jenis_lapangan, String UID_Mitra) {
+    public LapanganData(String id_lapangan, String nama_lapangan, String gambar_lapangan, long harga, String kategori_lapangan, String jenis_lapangan, String UID_Mitra) {
+        this.id_lapangan = id_lapangan;
         this.nama_lapangan = nama_lapangan;
         this.gambar_lapangan = gambar_lapangan;
         this.harga = harga;
