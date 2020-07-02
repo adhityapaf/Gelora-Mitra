@@ -89,7 +89,6 @@ public class LapanganAdapter extends RecyclerView.Adapter<LapanganAdapter.ViewHo
                 intent.putExtra(NAMA_LAPANGAN, namaLapanganStr);
                 intent.putExtra(KATEGORI_LAPANGAN, kategoriLapanganStr);
                 intent.putExtra(JENIS_LAPANGAN, jenisLapanganStr);
-                intent.putExtra(WAKTU_SEWA, jamList);
                 intent.putExtra(HARGA_LAPANGAN, hargaLapanganStr);
                 intent.putExtra(GAMBAR_LAPANGAN, gambarLapanganStr);
                 mContext.startActivity(intent);

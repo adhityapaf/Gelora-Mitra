@@ -47,6 +47,7 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.gelora.mitra.adapter.LapanganAdapter.GAMBAR_LAPANGAN;
 import static com.gelora.mitra.adapter.LapanganAdapter.HARGA_LAPANGAN;
@@ -96,8 +97,6 @@ public class EditLapanganActivity extends AppCompatActivity implements TimePicke
         namaLapanganIntent = intent.getStringExtra(NAMA_LAPANGAN);
         kategoriLapanganIntent = intent.getStringExtra(KATEGORI_LAPANGAN);
         jenisLapanganIntent = intent.getStringExtra(JENIS_LAPANGAN);
-        waktuSewaIntent = intent.getStringArrayListExtra(WAKTU_SEWA);
-        hargaLapanganIntent = intent.getStringExtra(HARGA_LAPANGAN);
         gambarLapanganIntent = intent.getStringExtra(GAMBAR_LAPANGAN);
         //
         namaLapangan = findViewById(R.id.namaLapangan_field);
@@ -119,10 +118,7 @@ public class EditLapanganActivity extends AppCompatActivity implements TimePicke
         // set data dari intent
         namaLapangan.setText(namaLapanganIntent);
         // spinner udh keselect di populatespinner
-        stringArrayList.clear();
-        stringArrayList.addAll(waktuSewaIntent);
         initRecyclerView();
-        hargaLapangan.setText(hargaLapanganIntent);
         Glide.with(this)
                 .load(gambarLapanganIntent)
                 .centerCrop()
@@ -177,10 +173,7 @@ public class EditLapanganActivity extends AppCompatActivity implements TimePicke
                     Toast.makeText(EditLapanganActivity.this, "Silakan isi Waktu Sewa Lapangan", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (!gambarLapangan.isShown()) {
-                    Toast.makeText(EditLapanganActivity.this, "Silakan Pilih Gambar", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+
 
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
                     Toast.makeText(EditLapanganActivity.this, "Proses Upload sedang berlangsung, mohon ditunggu.", Toast.LENGTH_SHORT).show();
@@ -189,9 +182,9 @@ public class EditLapanganActivity extends AppCompatActivity implements TimePicke
                     //
                     if (mImageUri != null){
                         mProgressBar.setVisibility(View.VISIBLE);
-                        mStorageRef = FirebaseStorage.getInstance().getReference("foto_lapangan").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("id_lapangan").child(String.valueOf(counterLapangan));
-                        mDatabaseRef = FirebaseDatabase.getInstance().getReference("lapangan").child("id_lapangan").child(String.valueOf(counterLapangan)).child("gambar_lapangan");
-                        final DatabaseReference mDatabaseRef2 = FirebaseDatabase.getInstance().getReference("pemilik_lapangan").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("id_lapangan").child(String.valueOf(counterLapangan)).child("gambar_lapangan");
+                        mStorageRef = FirebaseStorage.getInstance().getReference("foto_lapangan").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("id_lapangan").child(String.valueOf(idLapanganIntent));
+                        mDatabaseRef = FirebaseDatabase.getInstance().getReference("lapangan").child("id_lapangan").child(String.valueOf(idLapanganIntent)).child("gambar_lapangan");
+                        final DatabaseReference mDatabaseRef2 = FirebaseDatabase.getInstance().getReference("pemilik_lapangan").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("id_lapangan").child(String.valueOf(idLapanganIntent)).child("gambar_lapangan");
                         final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()+ "." + getFileExtension(mImageUri));
                         mUploadTask = fileReference.putFile(mImageUri)
                                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -221,11 +214,9 @@ public class EditLapanganActivity extends AppCompatActivity implements TimePicke
                                         jenisPilihan = jenisSpinner.getSelectedItem().toString();
                                         int hargaLapanganInt = Integer.parseInt(hargaLapangan.getText().toString());
                                         String UIDMitra = FirebaseAuth.getInstance().getUid();
-                                        String idLapangan = String.valueOf(counterLapangan);
-                                        lapanganCounter.setValue(counterLapangan);
-                                        totalRef.setValue(counterTotalLapangan);
-                                        DatabaseReference lapanganRefId = lapanganRef.child("id_lapangan").child(String.valueOf(counterLapangan));
-                                        DatabaseReference pemilikLapanganRefID = pemilikLapanganRef.child("id_lapangan").child(String.valueOf(counterLapangan));
+                                        String idLapangan = String.valueOf(idLapanganIntent);
+                                        DatabaseReference lapanganRefId = lapanganRef.child("id_lapangan").child(String.valueOf(idLapanganIntent));
+                                        DatabaseReference pemilikLapanganRefID = pemilikLapanganRef.child("id_lapangan").child(String.valueOf(idLapanganIntent));
                                         String gambarImageString = imageDownloadUrl;
                                         //
                                         LapanganData lapanganData = new LapanganData(
@@ -239,14 +230,14 @@ public class EditLapanganActivity extends AppCompatActivity implements TimePicke
                                         );
                                         lapanganRefId.setValue(lapanganData);
                                         pemilikLapanganRefID.setValue(lapanganData);
-                                        DatabaseReference jamRef = FirebaseDatabase.getInstance().getReference("lapangan").child("id_lapangan").child(String.valueOf(counterLapangan)).child("jam_sewa");
-                                        DatabaseReference jamPemilikRef = pemilikLapanganRef.child("id_lapangan").child(String.valueOf(counterLapangan)).child("jam_sewa");
+                                        DatabaseReference jamRef = FirebaseDatabase.getInstance().getReference("lapangan").child("id_lapangan").child(String.valueOf(idLapanganIntent)).child("jam_sewa");
+                                        DatabaseReference jamPemilikRef = pemilikLapanganRef.child("id_lapangan").child(String.valueOf(idLapanganIntent)).child("jam_sewa");
                                         for (int i = 0; i < stringArrayList.size(); i++) {
                                             jamRef.child(stringArrayList.get(i)).setValue("tersedia");
                                             jamPemilikRef.child(stringArrayList.get(i)).setValue("tersedia");
                                         }
                                         Log.d(TAG, "onSuccess: Success Upload");
-                                        Toast.makeText(EditLapanganActivity.this, "Tambahkan Lapangan Berhasil!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(EditLapanganActivity.this, "Edit Lapangan Berhasil!", Toast.LENGTH_SHORT).show();
                                         finish();
                                     }
                                 })
@@ -264,7 +255,39 @@ public class EditLapanganActivity extends AppCompatActivity implements TimePicke
                                     }
                                 });
                     } else {
-                        Toast.makeText(EditLapanganActivity.this, "Anda Belum Memilih Gambar", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "onClick: Upload tanpa perubahan gambar ...");
+                        kategoriPilihan = kategoriSpinner.getSelectedItem().toString();
+                        jenisPilihan = jenisSpinner.getSelectedItem().toString();
+                        String namaLapanganString = namaLapangan.getText().toString();
+                        kategoriPilihan = kategoriSpinner.getSelectedItem().toString();
+                        jenisPilihan = jenisSpinner.getSelectedItem().toString();
+                        int hargaLapanganInt = Integer.parseInt(hargaLapangan.getText().toString());
+                        String UIDMitra = FirebaseAuth.getInstance().getUid();
+                        String idLapangan = String.valueOf(idLapanganIntent);
+                        DatabaseReference lapanganRefId = lapanganRef.child("id_lapangan").child(String.valueOf(idLapanganIntent));
+                        DatabaseReference pemilikLapanganRefID = pemilikLapanganRef.child("id_lapangan").child(String.valueOf(idLapanganIntent));
+                        String gambarImageString = gambarLapanganIntent;
+                        //
+                        LapanganData lapanganData = new LapanganData(
+                                idLapangan,
+                                namaLapanganString,
+                                gambarImageString,
+                                hargaLapanganInt,
+                                kategoriPilihan,
+                                jenisPilihan,
+                                UIDMitra
+                        );
+                        lapanganRefId.setValue(lapanganData);
+                        pemilikLapanganRefID.setValue(lapanganData);
+                        DatabaseReference jamRef = FirebaseDatabase.getInstance().getReference("lapangan").child("id_lapangan").child(String.valueOf(idLapanganIntent)).child("jam_sewa");
+                        DatabaseReference jamPemilikRef = pemilikLapanganRef.child("id_lapangan").child(String.valueOf(idLapanganIntent)).child("jam_sewa");
+                        for (int i = 0; i < stringArrayList.size(); i++) {
+                            jamRef.child(stringArrayList.get(i)).setValue("tersedia");
+                            jamPemilikRef.child(stringArrayList.get(i)).setValue("tersedia");
+                        }
+                        Log.d(TAG, "onSuccess: Success Upload");
+                        Toast.makeText(EditLapanganActivity.this, "Edit Lapangan Berhasil!", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
 
 
@@ -313,7 +336,24 @@ public class EditLapanganActivity extends AppCompatActivity implements TimePicke
                 if (snapshot.exists()) {
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         kategoriArray.add(ds.getValue(String.class));
+
                     }
+                    int positionKategori = 0;
+                    // buat pengodisian
+                    if (kategoriLapanganIntent.equals("Futsal")){
+                        positionKategori = 1;
+                    }
+                    if (kategoriLapanganIntent.equals("Basket")){
+                        positionKategori = 2;
+                    }
+                    if (kategoriLapanganIntent.equals("Sepak Bola")){
+                        positionKategori = 3;
+                    }
+                    if (kategoriLapanganIntent.equals("Badminton")){
+                        positionKategori = 4;
+                    }
+
+                    kategoriSpinner.setSelection(positionKategori);
                 }
             }
 
@@ -330,7 +370,43 @@ public class EditLapanganActivity extends AppCompatActivity implements TimePicke
                         String jenisValues = ds.getValue(String.class);
                         jenisArray.add(jenisValues);
                     }
+                    int posisi = 0;
+                    // buat pengodisian
+                    if (jenisLapanganIntent.equals("Rumput")){
+                        posisi = 1;
+                    }
+                    if (jenisLapanganIntent.equals("Vinyl")){
+                        posisi = 2;
+                    }
+                    jenisSpinner.setSelection(posisi);
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        pemilikLapanganRef.child("id_lapangan").child(idLapanganIntent).child("jam_sewa").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    String jamStr = ds.getKey();
+                    stringArrayList.add(jamStr);
+                    initRecyclerView();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        pemilikLapanganRef.child("id_lapangan").child(idLapanganIntent).child("harga").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String harga  = snapshot.getValue().toString();
+                hargaLapangan.setText(harga);
             }
 
             @Override
@@ -348,7 +424,7 @@ public class EditLapanganActivity extends AppCompatActivity implements TimePicke
         adapterJenis.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         if (kategoriSpinner != null) {
             kategoriSpinner.setAdapter(adapterKategori);
-            kategoriSpinner.setSelection(adapterKategori.getPosition(kategoriLapanganIntent));
+
         }
         if (jenisSpinner != null) {
             jenisSpinner.setAdapter(adapterJenis);
