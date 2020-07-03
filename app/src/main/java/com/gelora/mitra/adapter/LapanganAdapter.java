@@ -172,13 +172,13 @@ public class LapanganAdapter extends RecyclerView.Adapter<LapanganAdapter.ViewHo
     }
 
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView namaLapangan, kategoriLapangan, jenisLapangan, hargaSewa;
-        Button editLapangan, hapusLapangan;
-        ImageView gambarLapangan;
-        RecyclerView jamSewaRecycler;
-        RecyclerView.LayoutManager layoutManager;
-        ViewHolder(@NonNull View itemView) {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView namaLapangan, kategoriLapangan, jenisLapangan, hargaSewa;
+        public Button editLapangan, hapusLapangan;
+        public ImageView gambarLapangan;
+        public RecyclerView jamSewaRecycler;
+        public RecyclerView.LayoutManager layoutManager;
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             layoutManager = new LinearLayoutManager(itemView.getContext(), LinearLayoutManager.HORIZONTAL, false);
             gambarLapangan = itemView.findViewById(R.id.lapangan_picture);

@@ -70,7 +70,12 @@
             android:fontFamily="sans-serif-light"
             android:hint="Cari Lapangan.."
             android:paddingStart="16dp"
-            android:paddingEnd="16dp" />
+            android:paddingEnd="16dp"
+            android:inputType="text"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            />
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
