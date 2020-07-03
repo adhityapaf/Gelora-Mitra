@@ -83,7 +83,12 @@ public class LapanganFragment extends Fragment {
         totalLapanganCounter.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                pemilikCounter = Integer.parseInt(snapshot.getValue().toString());
+                if (snapshot.exists()){
+                    pemilikCounter = Integer.parseInt(snapshot.getValue().toString());
+
+                } else {
+                    pemilikCounter = 0;
+                }
             }
 
             @Override

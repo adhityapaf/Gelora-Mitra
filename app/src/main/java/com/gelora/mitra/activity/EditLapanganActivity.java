@@ -405,8 +405,13 @@ public class EditLapanganActivity extends AppCompatActivity implements TimePicke
         pemilikLapanganRef.child("id_lapangan").child(idLapanganIntent).child("harga").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String harga  = snapshot.getValue().toString();
-                hargaLapangan.setText(harga);
+                if (snapshot.exists()){
+                    String harga  = snapshot.getValue().toString();
+                    hargaLapangan.setText(harga);
+                }
+                else {
+                    hargaLapangan.setText("0");
+                }
             }
 
             @Override
@@ -436,10 +441,14 @@ public class EditLapanganActivity extends AppCompatActivity implements TimePicke
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         String pilihanJam;
-        if (minute<10){
+        if (minute<10 && hourOfDay<10){
+            pilihanJam = "0"+hourOfDay + ":0" +minute;
+        } else if (minute<10){
             pilihanJam = hourOfDay + ":0" +minute;
+        } else if (hourOfDay<10){
+            pilihanJam = "0"+ hourOfDay +":"+minute;
         } else {
-            pilihanJam = hourOfDay + ":" +minute;
+            pilihanJam = hourOfDay + ":"+minute;
         }
         stringArrayList.add(pilihanJam);
         initRecyclerView();
