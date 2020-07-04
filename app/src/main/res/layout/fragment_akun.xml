@@ -47,8 +47,9 @@
         </RelativeLayout>
     </Toolbar>
 <ScrollView
+    android:id="@+id/akunscroll"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_below="@id/toolbar"
     android:layout_marginStart="20dp"
     android:layout_marginTop="30dp"
@@ -114,7 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/emailMitraEdit_label"
             android:layout_marginTop="8dp"
-            android:background="@drawable/green_stroke_rectangle"
+            android:background="@drawable/disabled_green_stroke_rectangle"
             android:hint="Email.."
             android:inputType="none"
             android:focusable="false"
@@ -162,34 +163,40 @@
             android:textColor="@color/putih"
             android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/tentangKami_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/simpanPerubahan_button"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/button_blue_rounded"
-            android:fontFamily="sans-serif"
-            android:text="Tentang Kami"
-            android:textAllCaps="false"
-            android:textColor="@color/putih"
-            android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/logout_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tentangKami_button"
-            android:background="@drawable/button_red_rounded"
-            android:fontFamily="sans-serif"
-            android:text="Logout"
-            android:textAllCaps="false"
-            android:textColor="@color/putih"
-            android:textSize="18sp" />
     </RelativeLayout>
 </ScrollView>
+    <Button
+        android:id="@+id/tentangKami_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/logout_button"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/button_blue_rounded"
+        android:fontFamily="sans-serif"
+        android:text="Tentang Kami"
+        android:textAllCaps="false"
+        android:textColor="@color/putih"
+        android:textSize="18sp" />
 
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_red_rounded"
+        android:fontFamily="sans-serif"
+        android:text="Logout"
+        android:textAllCaps="false"
+        android:textColor="@color/putih"
+        android:textSize="18sp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        />
 
     <ImageView
         android:layout_width="wrap_content"
