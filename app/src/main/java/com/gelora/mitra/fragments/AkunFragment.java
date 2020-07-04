@@ -65,7 +65,7 @@ public class AkunFragment extends Fragment {
                 userRef.child("nama").setValue(nama);
                 userRef.child("password").setValue(passwrd);
                 FirebaseAuth.getInstance().getCurrentUser().updatePassword(passwrd);
-            Toast.makeText(getContext(), "Berhasil simpan perubahan akun", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Berhasil simpan perubahan akun", Toast.LENGTH_LONG).show();
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {
