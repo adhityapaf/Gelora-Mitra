@@ -218,6 +218,7 @@ public class EditLapanganActivity extends AppCompatActivity implements TimePicke
                                         DatabaseReference lapanganRefId = lapanganRef.child("id_lapangan").child(String.valueOf(idLapanganIntent));
                                         DatabaseReference pemilikLapanganRefID = pemilikLapanganRef.child("id_lapangan").child(String.valueOf(idLapanganIntent));
                                         String gambarImageString = imageDownloadUrl;
+                                        String searchString = namaLapanganString.toUpperCase();
                                         //
                                         LapanganData lapanganData = new LapanganData(
                                                 idLapangan,
@@ -226,7 +227,8 @@ public class EditLapanganActivity extends AppCompatActivity implements TimePicke
                                                 hargaLapanganInt,
                                                 kategoriPilihan,
                                                 jenisPilihan,
-                                                UIDMitra
+                                                UIDMitra,
+                                                searchString
                                         );
                                         lapanganRefId.setValue(lapanganData);
                                         pemilikLapanganRefID.setValue(lapanganData);
@@ -267,6 +269,7 @@ public class EditLapanganActivity extends AppCompatActivity implements TimePicke
                         DatabaseReference lapanganRefId = lapanganRef.child("id_lapangan").child(String.valueOf(idLapanganIntent));
                         DatabaseReference pemilikLapanganRefID = pemilikLapanganRef.child("id_lapangan").child(String.valueOf(idLapanganIntent));
                         String gambarImageString = gambarLapanganIntent;
+                        String searchString = namaLapanganString.toUpperCase();
                         //
                         LapanganData lapanganData = new LapanganData(
                                 idLapangan,
@@ -275,7 +278,8 @@ public class EditLapanganActivity extends AppCompatActivity implements TimePicke
                                 hargaLapanganInt,
                                 kategoriPilihan,
                                 jenisPilihan,
-                                UIDMitra
+                                UIDMitra,
+                                searchString
                         );
                         lapanganRefId.setValue(lapanganData);
                         pemilikLapanganRefID.setValue(lapanganData);

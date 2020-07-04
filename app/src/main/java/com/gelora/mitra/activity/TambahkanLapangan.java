@@ -203,6 +203,7 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
                                         DatabaseReference lapanganRefId = lapanganRef.child("id_lapangan").child(String.valueOf(counterLapangan));
                                         DatabaseReference pemilikLapanganRefID = pemilikLapanganRef.child("id_lapangan").child(String.valueOf(counterLapangan));
                                         String gambarImageString = imageDownloadUrl;
+                                        String searchString = namaLapanganString.toUpperCase();
                                         //
                                         LapanganData lapanganData = new LapanganData(
                                                 idLapangan,
@@ -211,7 +212,8 @@ public class TambahkanLapangan extends AppCompatActivity implements TimePickerDi
                                                 hargaLapanganInt,
                                                 kategoriPilihan,
                                                 jenisPilihan,
-                                                UIDMitra
+                                                UIDMitra,
+                                                searchString
                                         );
                                         lapanganRefId.setValue(lapanganData);
                                         pemilikLapanganRefID.setValue(lapanganData);

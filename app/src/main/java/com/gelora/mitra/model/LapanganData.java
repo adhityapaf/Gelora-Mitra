@@ -15,6 +15,15 @@ public class LapanganData {
     private String jenis_lapangan;
     private String UID_Mitra;
     HashMap<String,String> jam_sewa;
+    private String searchString;
+
+    public String getSearchString() {
+        return searchString;
+    }
+
+    public void setSearchString(String searchString) {
+        this.searchString = searchString;
+    }
 
     public String getId_lapangan() {
         return id_lapangan;
@@ -84,7 +93,7 @@ public class LapanganData {
     }
 
 
-    public LapanganData(String id_lapangan, String nama_lapangan, String gambar_lapangan, long harga, String kategori_lapangan, String jenis_lapangan, String UID_Mitra) {
+    public LapanganData(String id_lapangan, String nama_lapangan, String gambar_lapangan, long harga, String kategori_lapangan, String jenis_lapangan, String UID_Mitra, String searchString) {
         this.id_lapangan = id_lapangan;
         this.nama_lapangan = nama_lapangan;
         this.gambar_lapangan = gambar_lapangan;
@@ -92,5 +101,6 @@ public class LapanganData {
         this.kategori_lapangan = kategori_lapangan;
         this.jenis_lapangan = jenis_lapangan;
         this.UID_Mitra = UID_Mitra;
+        this.searchString = searchString;
     }
 }

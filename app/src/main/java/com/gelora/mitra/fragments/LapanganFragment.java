@@ -71,6 +71,13 @@ public class LapanganFragment extends Fragment {
     ArrayList<String> jamSewaArrayList;
     int pemilikCounter = 0;
     private static final String TAG = "LapanganFragment";
+
+    @Override
+    public void onStart() {
+        readData();
+        super.onStart();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -149,7 +156,7 @@ public class LapanganFragment extends Fragment {
                 if (!s.toString().isEmpty()){
                     setAdapter(s.toString());
                 } else {
-                    readData();
+                    onStart();
                 }
             }
         });
@@ -157,8 +164,9 @@ public class LapanganFragment extends Fragment {
     }
 
     private void setAdapter(String toString) {
+        String upper = toString.toUpperCase();
         DatabaseReference queRef = ref.child("id_lapangan");
-        Query query = queRef.orderByChild("nama_lapangan").startAt(toString).endAt(toString +"\uf8ff");
+        Query query = queRef.orderByChild("searchString").startAt(upper).endAt(upper +"\uf8ff");
         options = new FirebaseRecyclerOptions.Builder<LapanganData>().setQuery(query, LapanganData.class).build();
         adapter = new FirebaseRecyclerAdapter<LapanganData, LapanganAdapter.ViewHolder>(options) {
             @Override
