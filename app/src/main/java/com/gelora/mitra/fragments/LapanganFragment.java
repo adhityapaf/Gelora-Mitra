@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -71,7 +73,8 @@ public class LapanganFragment extends Fragment {
     ArrayList<String> jamSewaArrayList;
     int pemilikCounter = 0;
     private static final String TAG = "LapanganFragment";
-
+    TextView lapanganKosong;
+    ImageView lapanganKosongGambar;
     @Override
     public void onStart() {
         readData();
@@ -82,6 +85,8 @@ public class LapanganFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lapangan, container, false);
+        lapanganKosong = view.findViewById(R.id.text_lapanganKosong);
+        lapanganKosongGambar = view.findViewById(R.id.img_tambahkanLapanganKosong);
         mContext = getContext();
         ref = FirebaseDatabase.getInstance().getReference("pemilik_lapangan").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         lapanganRef = FirebaseDatabase.getInstance().getReference("lapangan");
@@ -280,6 +285,16 @@ public class LapanganFragment extends Fragment {
                     System.out.println(list);
                     LapanganAdapter lapanganAdapter = new LapanganAdapter(list, getActivity());
                     recyclerView.setAdapter(lapanganAdapter);
+                    lapanganKosong.setVisibility(View.GONE);
+                    lapanganKosongGambar.setVisibility(View.GONE);
+                    if (list.size() == 0){
+                        lapanganKosong.setVisibility(View.VISIBLE);
+                        lapanganKosongGambar.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                       lapanganKosong.setVisibility(View.VISIBLE);
+                       lapanganKosongGambar.setVisibility(View.VISIBLE);
+
                 }
             }
 

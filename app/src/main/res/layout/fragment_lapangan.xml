@@ -58,8 +58,7 @@
         android:layout_below="@id/toolbar"
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="20dp"
-        >
+        android:layout_marginEnd="20dp">
 
         <EditText
             android:id="@+id/searchbox_lapangan"
@@ -69,25 +68,49 @@
             android:drawableEnd="@drawable/ic_search_black_24dp"
             android:fontFamily="sans-serif-light"
             android:hint="Cari Lapangan.."
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
+            android:imeOptions="actionDone"
             android:inputType="text"
             android:maxLines="1"
-            android:singleLine="true"
-            android:imeOptions="actionDone"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:singleLine="true" />
+
+        <ImageView
+            android:id="@+id/img_tambahkanLapanganKosong"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_above="@id/text_lapanganKosong"
+            android:layout_centerInParent="true"
+            android:elevation="2dp"
+            android:src="@drawable/ic_undraw_add_file2_gvbb"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/text_lapanganKosong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="Daftar lapanganmu kosong nih. Yuk tambahkan sekarang!"
+            android:textColor="@color/hitam"
+            android:textSize="20sp"
+            android:visibility="gone"
+
             />
+
         <ScrollView
+            android:id="@+id/listLapangan_scroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/searchbox_lapangan"
-            android:layout_marginTop="24dp"
-            android:id="@+id/listLapangan_scroll"
-            >
+            android:layout_marginTop="24dp">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/lapangan_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />
         </ScrollView>
 
     </RelativeLayout>
@@ -97,8 +120,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:src="@drawable/background_fragments"
         android:layout_marginBottom="-50dp"
+        android:src="@drawable/background_fragments"
         android:translationZ="-10dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -110,13 +133,13 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="36dp"
         android:backgroundTint="@color/colorPrimary"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:focusable="true"
         android:src="@drawable/ic_add_black_24dp"
         android:tint="@color/putih"
-        android:elevation="10dp"
+        app:borderWidth="0dp"
         app:fabCustomSize="70dp"
         app:maxImageSize="48dp"
-        app:rippleColor="@android:color/background_dark"
-        android:clickable="true"
-        android:focusable="true"
-        app:borderWidth="0dp" />
+        app:rippleColor="@android:color/background_dark" />
 </RelativeLayout>
