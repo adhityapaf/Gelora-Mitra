@@ -27,6 +27,7 @@ public class DashboardFragment extends Fragment {
     TextView namaMitra, penghasilanText, lapanganText, pesananText;
     FirebaseAuth firebaseAuth;
     LoadingDialog loadingDialog1;
+    String totalPesanan, totalPenghasilan;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,7 +69,7 @@ public class DashboardFragment extends Fragment {
                 namaMitra.setText("Gagal Fetch");
             }
         }
-        DatabaseReference totalLapanganRef =  FirebaseDatabase.getInstance().getReference("pemilik_lapangan").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("total_lapangan");
+        final DatabaseReference totalLapanganRef =  FirebaseDatabase.getInstance().getReference("pemilik_lapangan").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("total_lapangan");
         totalLapanganRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -86,5 +87,40 @@ public class DashboardFragment extends Fragment {
             }
         });
         totalLapanganRef.keepSynced(true);
+        final DatabaseReference totalPesananRef = FirebaseDatabase.getInstance().getReference("pesanan_pemilik").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("total_pesanan");
+        totalPesananRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    totalPesanan = snapshot.getValue().toString();
+                    pesananText.setText(totalPesanan);
+                } else {
+                    totalPesananRef.setValue(0);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        final DatabaseReference totalPenghasilanRef = FirebaseDatabase.getInstance().getReference("pesanan_pemilik").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("total_penghasilan");
+        totalPenghasilanRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    totalPenghasilan = snapshot.getValue().toString();
+                    penghasilanText.setText(totalPenghasilan);
+                } else {
+                    totalPenghasilanRef.setValue(0);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
