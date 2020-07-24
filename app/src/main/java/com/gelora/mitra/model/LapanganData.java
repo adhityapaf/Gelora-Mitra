@@ -1,10 +1,6 @@
 package com.gelora.mitra.model;
 
-import com.gelora.mitra.R;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class LapanganData {
     private String id_lapangan;

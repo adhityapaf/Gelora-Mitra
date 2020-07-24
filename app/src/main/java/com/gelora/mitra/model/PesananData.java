@@ -8,8 +8,10 @@ public class PesananData {
     private String jam_pesan;
     private String tanggal_pesan;
     private String status_pesanan;
+    private String nama_lapangan;
+    private String alasan_status;
 
-    public PesananData(String id_pesanan, String nama_pemesan, int total_harga, String bukti_pembayaran, String jam_pesan, String tanggal_pesan, String status_pesanan) {
+    public PesananData(String id_pesanan, String nama_pemesan, int total_harga, String bukti_pembayaran, String jam_pesan, String tanggal_pesan, String status_pesanan, String nama_lapangan, String alasan_status) {
         this.id_pesanan = id_pesanan;
         this.nama_pemesan = nama_pemesan;
         this.total_harga = total_harga;
@@ -17,9 +19,27 @@ public class PesananData {
         this.jam_pesan = jam_pesan;
         this.tanggal_pesan = tanggal_pesan;
         this.status_pesanan = status_pesanan;
+        this.nama_lapangan = nama_lapangan;
+        this.alasan_status = alasan_status;
     }
 
     public PesananData() {
+    }
+
+    public String getAlasan_status() {
+        return alasan_status;
+    }
+
+    public void setAlasan_status(String alasan_status) {
+        this.alasan_status = alasan_status;
+    }
+
+    public String getNama_lapangan() {
+        return nama_lapangan;
+    }
+
+    public void setNama_lapangan(String nama_lapangan) {
+        this.nama_lapangan = nama_lapangan;
     }
 
     public String getId_pesanan() {

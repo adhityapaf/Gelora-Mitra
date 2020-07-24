@@ -1,210 +1,268 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/green_stroke_rectangle"
     app:cardCornerRadius="5dp"
-    android:background="@drawable/green_stroke_rectangle">
+    android:layout_marginBottom="20dp">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
         android:background="@drawable/green_stroke_rectangle"
-        >
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp">
+
         <TextView
+            android:id="@+id/idTransaksi_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="sans-serif"
             android:text="ID TRANSAKSI"
             android:textColor="@color/hitam"
-            android:fontFamily="sans-serif"
             android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tanggalPesan_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:id="@+id/idTransaksi_label"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
             android:text="TANGGAL PESAN"
-            android:layout_centerHorizontal="true"
             android:textColor="@color/hitam"
-            android:fontFamily="sans-serif"
             android:textSize="12sp"
-            android:id="@+id/tanggalPesan_label"/>
+            android:textStyle="bold" />
+
         <TextView
+            android:id="@+id/waktuPesan_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="WAKTU PESAN"
-            android:layout_alignParentEnd="true"
-            android:textSize="12sp"
-            android:textColor="@color/hitam"
+            android:layout_below="@id/tanggalPesan_field"
+            android:layout_marginTop="16dp"
             android:fontFamily="sans-serif"
-            android:id="@+id/waktuPesan_label"/>
+            android:text="WAKTU PESAN"
+            android:textColor="@color/hitam"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
         <TextView
+            android:id="@+id/idTransaksi_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/idTransaksi_label"
-            android:text="0001"
-            android:background="@drawable/green_stroke_rectangle"
-            android:layout_alignEnd="@id/idTransaksi_label"
             android:layout_alignStart="@id/idTransaksi_label"
+            android:layout_alignEnd="@id/idTransaksi_label"
             android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:id="@+id/idTransaksi_field"
+            android:background="@drawable/green_stroke_rectangle"
             android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="0001"
             android:textColor="@color/hitam"
-            android:textSize="12sp"
-            />
+            android:textSize="14sp" />
+
         <TextView
+            android:id="@+id/tanggalPesan_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tanggalPesan_label"
             android:layout_alignStart="@id/tanggalPesan_label"
-            android:layout_alignEnd="@id/tanggalPesan_label"
-            android:background="@drawable/green_stroke_rectangle"
             android:layout_marginTop="4dp"
-            android:text="01/06/2020"
-            android:gravity="center"
-            android:paddingBottom="4dp"
-            android:paddingTop="4dp"
-            android:textColor="@color/hitam"
+            android:background="@drawable/green_stroke_rectangle"
             android:fontFamily="sans-serif"
-            android:textSize="12sp"
-            android:id="@+id/tanggalPesan_field"/>
+            android:gravity="center"
+            android:paddingStart="20dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="8dp"
+            android:text="Senin, 22 Juli 2020"
+            android:textColor="@color/hitam"
+            android:textSize="14sp" />
+
         <TextView
+            android:id="@+id/waktuPesan_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="13.00"
             android:layout_below="@id/waktuPesan_label"
             android:layout_alignStart="@id/waktuPesan_label"
-            android:layout_alignEnd="@id/waktuPesan_label"
-            android:background="@drawable/green_stroke_rectangle"
-            android:gravity="center"
+            android:layout_alignEnd="@id/tanggalPesan_field"
             android:layout_marginTop="4dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:textSize="12sp"
-            android:textColor="@color/hitam"
+            android:background="@drawable/green_stroke_rectangle"
             android:fontFamily="sans-serif"
-            android:id="@+id/waktuPesan_field"/>
+            android:gravity="center"
+            android:paddingStart="18sp"
+            android:paddingTop="8dp"
+            android:paddingEnd="18sp"
+            android:paddingBottom="8dp"
+            android:text="13.00, 14.00, 19.00"
+            android:textColor="@color/hitam"
+            android:textSize="14sp" />
+
         <TextView
+            android:id="@+id/namaPemesan_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/namaPemesan_label"
-            android:text="NAMA PEMESAN"
-            android:layout_below="@id/idTransaksi_field"
+            android:layout_below="@id/waktuPesan_field"
             android:layout_marginTop="12dp"
             android:fontFamily="sans-serif"
+            android:text="NAMA PEMESAN"
+            android:textColor="@color/hitam"
             android:textSize="12sp"
-            android:textColor="@color/hitam"/>
+            android:textStyle="bold" />
 
         <TextView
-            android:layout_marginTop="4dp"
+            android:id="@+id/namaPemesan_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/namaPemesan_field"
-            android:text="Nama Pemesan"
-            android:background="@drawable/green_stroke_rectangle"
             android:layout_below="@id/namaPemesan_label"
-            android:paddingTop="4dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:paddingBottom="4dp"
-            android:textColor="@color/hitam"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/green_stroke_rectangle"
             android:fontFamily="sans-serif"
-            android:textSize="12sp"/>
+            android:paddingStart="12dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="10dp"
+            android:text="Nama Pemesan"
+            android:textColor="@color/hitam"
+            android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/namaLapanganPesanan_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NAMA LAPANGAN"
             android:layout_below="@id/namaPemesan_field"
             android:layout_marginTop="12dp"
             android:fontFamily="sans-serif"
-            android:textSize="12sp"
+            android:text="NAMA LAPANGAN"
             android:textColor="@color/hitam"
-            android:id="@+id/namaLapanganPesanan_label"
-            />
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/namaLapanganPesanan_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/namaLapanganPesanan_label"
-            android:text="Nama Lapangan"
-            android:background="@drawable/green_stroke_rectangle"
             android:layout_marginTop="4dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:textColor="@color/hitam"
-            android:textSize="12sp"
+            android:background="@drawable/green_stroke_rectangle"
             android:fontFamily="sans-serif"
-            android:id="@+id/namaLapanganPesanan_field"/>
+            android:paddingStart="12dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="10dp"
+            android:text="Nama Lapangan"
+            android:textColor="@color/hitam"
+            android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/totalHarga_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TOTAL HARGA"
             android:layout_below="@id/namaLapanganPesanan_field"
             android:layout_marginTop="12dp"
             android:fontFamily="sans-serif"
+            android:text="TOTAL HARGA"
             android:textColor="@color/hitam"
             android:textSize="12sp"
-            android:id="@+id/totalHarga_label"
-            />
+            android:textStyle="bold" />
+
         <TextView
+            android:id="@+id/totalHarga_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/totalHarga_amount"
             android:layout_below="@+id/totalHarga_label"
-            android:text="Rp. 150.000,-"
-            android:textColor="@color/hitam"
-            android:fontFamily="sans-serif"
-            android:textSize="18sp"
             android:layout_marginTop="4dp"
-            android:textStyle="bold"/>
+            android:fontFamily="sans-serif"
+            android:text="Rp. 150.000,-"
+            android:textColor="@color/merah_font"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/totalHarga_amount"
-            android:layout_marginTop="14dp"
-            android:background="@drawable/button_blue_rounded"
-            android:text="Lihat Bukti Transfer"
-            android:textColor="@color/putih"
-            android:textAllCaps="false"
-            android:textSize="18sp"
-            android:fontFamily="sans-serif-medium"
             android:id="@+id/lihatBuktiTransfer_button"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/totalHarga_amount"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/horizontaldivider"
+            android:background="@drawable/button_blue_rounded"
+            android:fontFamily="sans-serif"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="Lihat Bukti Transfer"
+            android:textAllCaps="false"
+            android:textColor="@color/putih"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
         <Button
+            android:id="@+id/verifikasi_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lihatBuktiTransfer_button"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/horizontaldivider"
+            android:background="@drawable/button_green_rounded_5dp"
+            android:fontFamily="sans-serif"
+            android:text="Terima"
+            android:textAllCaps="false"
+            android:textColor="@color/putih"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <View
+            android:id="@+id/horizontaldivider"
+            android:layout_width="28dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/lihatBuktiTransfer_button"
+            android:layout_centerHorizontal="true"
+            android:background="@color/merah_font"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/tolak_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/lihatBuktiTransfer_button"
-            android:layout_marginTop="14dp"
-            android:background="@drawable/button_green_rounded_5dp"
-            android:text="Verifikasi"
-            android:textColor="@color/putih"
-            android:textAllCaps="false"
-            android:textSize="18sp"
-            android:fontFamily="sans-serif-medium"
-            android:id="@+id/verifikasi_button"
-            />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/verifikasi_button"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="20dp"
+            android:layout_toStartOf="@id/horizontaldivider"
             android:background="@drawable/button_red_rounded"
+            android:fontFamily="sans-serif"
             android:text="Tolak"
-            android:textColor="@color/putih"
             android:textAllCaps="false"
-            android:textSize="18sp"
-            android:fontFamily="sans-serif-medium"
-            android:id="@+id/tolak_button"
-            />
+            android:textColor="@color/putih"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/statusPesananText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/horizontaldivider"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-black"
+            android:text="Terverifikasi"
+            android:textColor="@color/colorPrimary"
+            android:textSize="28sp"
+            android:translationZ="5dp"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/statusIcon"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_below="@id/horizontaldivider"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/statusPesananText"
+            android:src="@drawable/ic_baseline_check_circle_24"
+            android:visibility="invisible" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
