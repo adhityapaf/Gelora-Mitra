@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gelora.mitra.R;
 import com.gelora.mitra.adapter.PesananAdapter;
+import com.gelora.mitra.adapter.TanggalPesananAdapter;
 import com.gelora.mitra.model.PesananData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +35,7 @@ public class PesananFragment extends Fragment {
     ProgressBar progressBar;
     Context mContext;
     DatabaseReference pesananRef;
-    ArrayList<PesananData> list;
+    ArrayList<String> list;
 
     @Nullable
     @Override
@@ -44,7 +45,7 @@ public class PesananFragment extends Fragment {
         pesananRecycler = view.findViewById(R.id.pesanan_recycler);
         progressBar = view.findViewById(R.id.progressbarlingkaran);
         mContext = getContext();
-        pesananRef = FirebaseDatabase.getInstance().getReference("pesanan_pemilik").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("id_pesanan");
+        pesananRef = FirebaseDatabase.getInstance().getReference("pesanan_pemilik").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         pesananRecycler.setHasFixedSize(true);
         pesananRecycler.setLayoutManager(new LinearLayoutManager(mContext));
         readData();
@@ -58,11 +59,10 @@ public class PesananFragment extends Fragment {
                 if (snapshot.exists()){
                     list = new ArrayList<>();
                     for (DataSnapshot ds : snapshot.getChildren()){
-                        PesananData pesananData = ds.getValue(PesananData.class);
-                        list.add(pesananData);
+                        list.add(ds.getKey());
                     }
-                    PesananAdapter pesananAdapter = new PesananAdapter(list, mContext);
-                    pesananRecycler.setAdapter(pesananAdapter);
+                    TanggalPesananAdapter tanggalPesananAdapter = new TanggalPesananAdapter(list, mContext);
+                    pesananRecycler.setAdapter(tanggalPesananAdapter);
                     progressBar.setVisibility(View.GONE);
                 } else {
                     Toast.makeText(mContext, "Daftar Pesanan Anda Masih Kosong.", Toast.LENGTH_SHORT).show();

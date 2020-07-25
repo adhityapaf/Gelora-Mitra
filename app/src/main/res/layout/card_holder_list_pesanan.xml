@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/green_stroke_rectangle_non_radius"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/orderId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="000001"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/hitam"
+            android:textSize="18sp"
+            />
+        <TextView
+            android:id="@+id/orderStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TERVERIFIKASI"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/hitam"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/lihatBukti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lihat"
+            android:textColor="@color/biru"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:fontFamily="sans-serif"
+            android:textSize="18sp"
+            />
+    </TableRow>
+</LinearLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <TextView
+        android:id="@+id/tanggal_transaksi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif"
+        android:text="26/06/2020"
+        android:textColor="@color/hitam"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TableLayout
+        android:id="@+id/orderTableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tanggal_transaksi"
+        android:layout_marginTop="10dp">
+
+        <TableRow
+            android:id="@+id/orderTableRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="Order ID"
+                android:textColor="@color/putih"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:gravity="center"
+                android:layout_gravity="center"
+
+                android:text="Status"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/putih"
+                android:textSize="18sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="Detail"
+                android:textColor="@color/putih"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:layout_gravity="center"
+                />
+        </TableRow>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/orderListRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TableLayout>
+</RelativeLayout>
