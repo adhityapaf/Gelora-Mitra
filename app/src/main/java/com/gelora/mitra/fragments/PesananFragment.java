@@ -59,7 +59,9 @@ public class PesananFragment extends Fragment {
                 if (snapshot.exists()){
                     list = new ArrayList<>();
                     for (DataSnapshot ds : snapshot.getChildren()){
-                        list.add(ds.getKey());
+                        if (!ds.getKey().equals("total_pesanan") && !ds.getKey().equals("total_penghasilan")){
+                            list.add(ds.getKey());
+                        }
                     }
                     TanggalPesananAdapter tanggalPesananAdapter = new TanggalPesananAdapter(list, mContext);
                     pesananRecycler.setAdapter(tanggalPesananAdapter);
