@@ -1,7 +1,10 @@
 package com.gelora.mitra.activity;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,8 +17,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.gelora.mitra.R;
 import com.gelora.mitra.adapter.PesananAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -30,18 +40,24 @@ import static com.gelora.mitra.adapter.PesananAdapter.STATUS_PESANAN;
 import static com.gelora.mitra.adapter.PesananAdapter.TANGGAL_PESANAN;
 import static com.gelora.mitra.adapter.PesananAdapter.TOTAL_HARGA;
 import static com.gelora.mitra.adapter.PesananAdapter.UID_MITRA;
+import static com.gelora.mitra.adapter.PesananAdapter.UID_PELANGGAN;
 
 public class DetailPesananActivity extends AppCompatActivity {
     TextView idTransaksi, tanggalPesan, waktuPesan,  namaPemesan, namaLapangan, totalHarga, statusPesanan;
     ImageView statusIcon;
     Button buktiTransferButton, tolakButton, terimaButton;
-    String idTransaksiIntent,namaPemesanIntent, buktiPembayaranIntent, jamPesanIntent, tanggalPesanIntent, statusPesanIntent, namaLapanganIntent, alasanPesananIntent, UIDMitraIntent;
+    String idTransaksiIntent,namaPemesanIntent, buktiPembayaranIntent, jamPesanIntent, tanggalPesanIntent, statusPesanIntent, namaLapanganIntent, alasanPesananIntent, UIDMitraIntent, UIDPelangganIntent;
     int totalHargaIntent;
     String forUploadText = "belum ada";
     String alasanDefault = "Tidak Ada";
     Locale locale = new Locale("id", "ID");
     NumberFormat n = NumberFormat.getCurrencyInstance(locale);
     String s, a;
+    DatabaseReference penggunaRef, pemilikRef;
+    String statuspesananTerimaString = "Pesanan Telah di Terima.";
+    String statuspesananTolakString = "Pesanan Telah di Tolak.";
+    long totalpenghasilan = 0;
+    DatabaseReference totalPenghasilanRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +76,11 @@ public class DetailPesananActivity extends AppCompatActivity {
 
         retrieveIntent();
         settingText();
+        totalPenghasilanRef = FirebaseDatabase.getInstance().getReference("pesanan_pemilik").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("total_penghasilan");
+        readData();
 
+        penggunaRef = FirebaseDatabase.getInstance().getReference("pesanan").child(UIDPelangganIntent).child(tanggalPesanIntent).child("id_pesanan").child(idTransaksiIntent);
+        pemilikRef = FirebaseDatabase.getInstance().getReference("pesanan_pemilik").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(tanggalPesanIntent).child("id_pesanan").child(idTransaksiIntent);
 
         // membuat tampilan seperti pop up
         DisplayMetrics dm = new DisplayMetrics();
@@ -87,10 +107,52 @@ public class DetailPesananActivity extends AppCompatActivity {
             }
         });
 
+        if (alasanPesananIntent.equals(statuspesananTerimaString)){
+            terimaButton.setVisibility(View.INVISIBLE);
+            tolakButton.setVisibility(View.INVISIBLE);
+            statusPesanan.setVisibility(View.VISIBLE);
+            statusIcon.setVisibility(View.VISIBLE);
+        } else if (alasanDefault.equals(statuspesananTolakString)){
+            terimaButton.setVisibility(View.INVISIBLE);
+            tolakButton.setVisibility(View.INVISIBLE);
+            statusPesanan.setVisibility(View.VISIBLE);
+            statusIcon.setVisibility(View.VISIBLE);
+            statusPesanan.setTextColor(Color.RED);
+            Glide.with(DetailPesananActivity.this)
+                    .load(R.drawable.ic_ditolak)
+                    .into(statusIcon);
+        }
+
         terimaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DetailPesananActivity.this, "Terima btn", Toast.LENGTH_SHORT).show();
+                final AlertDialog alertDialog = new AlertDialog.Builder(DetailPesananActivity.this).create();
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetailPesananActivity.this);
+                builder.setTitle("Terima Pesanan");
+                builder.setMessage("Apakah Anda yakin untuk menerima pesanan ini?");
+                builder.setNegativeButton("Kembali", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        alertDialog.cancel();
+                    }
+                });
+                builder.setPositiveButton("Terima", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        pemilikRef.child("alasan_status").setValue(statuspesananTerimaString);
+                        penggunaRef.child("alasan_status").setValue("Pesanan Diterima, Selamat Bermain!");
+                        penggunaRef.child("status_pesanan").setValue("Diterima");
+                        pemilikRef.child("status_pesanan").setValue("Diterima");
+                        terimaButton.setVisibility(View.INVISIBLE);
+                        tolakButton.setVisibility(View.INVISIBLE);
+                        statusPesanan.setVisibility(View.VISIBLE);
+                        statusPesanan.setText(statuspesananTerimaString);
+                        statusIcon.setVisibility(View.VISIBLE);
+                        totalpenghasilan = totalHargaIntent + totalpenghasilan;
+                        totalPenghasilanRef.setValue(totalpenghasilan);
+                    }
+                });
+                builder.show();
             }
         });
 
@@ -101,6 +163,20 @@ public class DetailPesananActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void readData() {
+        totalPenghasilanRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                totalpenghasilan = (long) snapshot.getValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void settingText() {
@@ -128,6 +204,7 @@ public class DetailPesananActivity extends AppCompatActivity {
         namaLapanganIntent = intent.getStringExtra(NAMA_LAPANGAN);
         alasanPesananIntent = intent.getStringExtra(ALASAN_PESANAN);
         UIDMitraIntent = intent.getStringExtra(UID_MITRA);
+        UIDPelangganIntent = intent.getStringExtra(UID_PELANGGAN);
         s = n.format(totalHargaIntent);
         a = s.replaceAll(",00", "").replaceAll("Rp", "Rp. ");
     }

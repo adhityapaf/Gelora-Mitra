@@ -22,12 +22,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class DashboardFragment extends Fragment {
 
     TextView namaMitra, penghasilanText, lapanganText, pesananText;
     FirebaseAuth firebaseAuth;
     LoadingDialog loadingDialog1;
     String totalPesanan, totalPenghasilan;
+    Locale locale = new Locale("id", "ID");
+    NumberFormat n = NumberFormat.getCurrencyInstance(locale);
+    String s, a;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -111,7 +117,10 @@ public class DashboardFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     totalPenghasilan = snapshot.getValue().toString();
-                    penghasilanText.setText(totalPenghasilan);
+                    int toal = Integer.parseInt(totalPenghasilan);
+                    s = n.format(toal);
+                    a = s.replaceAll(",00", "").replaceAll("Rp", "Rp. ");
+                    penghasilanText.setText(a);
                 } else {
                     totalPenghasilanRef.setValue(0);
                 }

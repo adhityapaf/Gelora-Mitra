@@ -11,8 +11,9 @@ public class PesananData {
     private String nama_lapangan;
     private String alasan_status;
     private String uid_mitra;
+    private String uid_pengguna;
 
-    public PesananData(String id_pesanan, String nama_pemesan, int total_harga, String bukti_pembayaran, String jam_pesan, String tanggal_pesan, String status_pesanan, String nama_lapangan, String alasan_status, String uid_mitra) {
+    public PesananData(String id_pesanan, String nama_pemesan, int total_harga, String bukti_pembayaran, String jam_pesan, String tanggal_pesan, String status_pesanan, String nama_lapangan, String alasan_status, String uid_mitra, String uid_pengguna) {
         this.id_pesanan = id_pesanan;
         this.nama_pemesan = nama_pemesan;
         this.total_harga = total_harga;
@@ -23,6 +24,15 @@ public class PesananData {
         this.nama_lapangan = nama_lapangan;
         this.alasan_status = alasan_status;
         this.uid_mitra = uid_mitra;
+        this.uid_pengguna = uid_pengguna;
+    }
+
+    public String getUid_pengguna() {
+        return uid_pengguna;
+    }
+
+    public void setUid_pengguna(String uid_pengguna) {
+        this.uid_pengguna = uid_pengguna;
     }
 
     public String getUid_mitra() {
