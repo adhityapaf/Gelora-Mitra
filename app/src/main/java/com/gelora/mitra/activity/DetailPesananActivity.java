@@ -8,11 +8,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,10 +45,10 @@ import static com.gelora.mitra.adapter.PesananAdapter.UID_MITRA;
 import static com.gelora.mitra.adapter.PesananAdapter.UID_PELANGGAN;
 
 public class DetailPesananActivity extends AppCompatActivity {
-    TextView idTransaksi, tanggalPesan, waktuPesan,  namaPemesan, namaLapangan, totalHarga, statusPesanan;
+    TextView idTransaksi, tanggalPesan, waktuPesan, namaPemesan, namaLapangan, totalHarga, statusPesanan;
     ImageView statusIcon;
     Button buktiTransferButton, tolakButton, terimaButton;
-    String idTransaksiIntent,namaPemesanIntent, buktiPembayaranIntent, jamPesanIntent, tanggalPesanIntent, statusPesanIntent, namaLapanganIntent, alasanPesananIntent, UIDMitraIntent, UIDPelangganIntent;
+    String idTransaksiIntent, namaPemesanIntent, buktiPembayaranIntent, jamPesanIntent, tanggalPesanIntent, statusPesanIntent, namaLapanganIntent, alasanPesananIntent, UIDMitraIntent, UIDPelangganIntent;
     int totalHargaIntent;
     String forUploadText = "belum ada";
     String alasanDefault = "Tidak Ada";
@@ -58,6 +60,8 @@ public class DetailPesananActivity extends AppCompatActivity {
     String statuspesananTolakString = "Pesanan Telah di Tolak.";
     long totalpenghasilan = 0;
     DatabaseReference totalPenghasilanRef;
+    String alasanText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +93,7 @@ public class DetailPesananActivity extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width), (int)(height*.7));
+        getWindow().setLayout((int) (width), (int) (height * .7));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.BOTTOM;
@@ -107,12 +111,12 @@ public class DetailPesananActivity extends AppCompatActivity {
             }
         });
 
-        if (alasanPesananIntent.equals(statuspesananTerimaString)){
+        if (alasanPesananIntent.equals(statuspesananTerimaString)) {
             terimaButton.setVisibility(View.INVISIBLE);
             tolakButton.setVisibility(View.INVISIBLE);
             statusPesanan.setVisibility(View.VISIBLE);
             statusIcon.setVisibility(View.VISIBLE);
-        } else if (alasanDefault.equals(statuspesananTolakString)){
+        } else if (alasanPesananIntent.equals(statuspesananTolakString)) {
             terimaButton.setVisibility(View.INVISIBLE);
             tolakButton.setVisibility(View.INVISIBLE);
             statusPesanan.setVisibility(View.VISIBLE);
@@ -159,7 +163,43 @@ public class DetailPesananActivity extends AppCompatActivity {
         tolakButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DetailPesananActivity.this, "Tolak btn", Toast.LENGTH_SHORT).show();
+                final AlertDialog alertDialog = new AlertDialog.Builder(DetailPesananActivity.this).create();
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetailPesananActivity.this);
+                builder.setTitle("Alasan Anda Menolak Pesanan ini?");
+                final EditText alasanEdit = new EditText(DetailPesananActivity.this);
+                alasanEdit.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder.setView(alasanEdit);
+                builder.setPositiveButton("Tolak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        alasanText = alasanEdit.getText().toString();
+                        if (alasanText.equals("")) {
+                            Toast.makeText(DetailPesananActivity.this, "Alasan masih kosong, silakan diisi untuk menolak pesanan", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else {
+                            pemilikRef.child("alasan_status").setValue(statuspesananTolakString);
+                            penggunaRef.child("alasan_status").setValue(alasanText);
+                            penggunaRef.child("status_pesanan").setValue("Ditolak");
+                            pemilikRef.child("status_pesanan").setValue("Ditolak");
+                            terimaButton.setVisibility(View.INVISIBLE);
+                            tolakButton.setVisibility(View.INVISIBLE);
+                            statusPesanan.setVisibility(View.VISIBLE);
+                            statusPesanan.setText(statuspesananTolakString);
+                            statusIcon.setVisibility(View.VISIBLE);
+                            Glide.with(DetailPesananActivity.this)
+                                    .load(R.drawable.ic_ditolak)
+                                    .into(statusIcon);
+                        }
+                    }
+
+                });
+                builder.setNegativeButton("Kembali", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        alertDialog.cancel();
+                    }
+                });
+                builder.show();
             }
         });
 
@@ -187,7 +227,6 @@ public class DetailPesananActivity extends AppCompatActivity {
         namaLapangan.setText(namaLapanganIntent);
         totalHarga.setText(a);
         statusPesanan.setText(statusPesanIntent);
-        statusPesanan.setTextColor(Color.BLACK);
         statusIcon.setVisibility(View.INVISIBLE);
         statusPesanan.setVisibility(View.INVISIBLE);
     }
