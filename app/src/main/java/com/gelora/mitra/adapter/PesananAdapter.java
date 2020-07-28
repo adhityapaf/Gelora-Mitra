@@ -32,6 +32,8 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
     public static final String ALASAN_PESANAN = "com.gelora.pengguna.alasan_pesanan";
     public static final String UID_MITRA = "com.gelora.pengguna.uid_mitra";
     public static final String UID_PELANGGAN = "com.gelora.pengguna.uid_mitra";
+    public static final String TANGGAL_PESAN_USER = "com.gelora.pengguna.tanggal_pesan_user";
+
 
 
     ArrayList<PesananData> pesananData;
@@ -68,6 +70,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
                 intent.putExtra(ALASAN_PESANAN, pesananData.get(position).getAlasan_status());
                 intent.putExtra(UID_MITRA, pesananData.get(position).getUid_mitra());
                 intent.putExtra(UID_PELANGGAN, pesananData.get(position).getUid_pengguna());
+                intent.putExtra(TANGGAL_PESAN_USER, pesananData.get(position).getTanggal_pesan_user());
                 mContext.startActivity(intent);
             }
         });

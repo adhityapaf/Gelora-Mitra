@@ -40,6 +40,7 @@ import static com.gelora.mitra.adapter.PesananAdapter.JAM_PESANAN;
 import static com.gelora.mitra.adapter.PesananAdapter.NAMA_PEMESAN;
 import static com.gelora.mitra.adapter.PesananAdapter.STATUS_PESANAN;
 import static com.gelora.mitra.adapter.PesananAdapter.TANGGAL_PESANAN;
+import static com.gelora.mitra.adapter.PesananAdapter.TANGGAL_PESAN_USER;
 import static com.gelora.mitra.adapter.PesananAdapter.TOTAL_HARGA;
 import static com.gelora.mitra.adapter.PesananAdapter.UID_MITRA;
 import static com.gelora.mitra.adapter.PesananAdapter.UID_PELANGGAN;
@@ -48,7 +49,7 @@ public class DetailPesananActivity extends AppCompatActivity {
     TextView idTransaksi, tanggalPesan, waktuPesan, namaPemesan, namaLapangan, totalHarga, statusPesanan;
     ImageView statusIcon;
     Button buktiTransferButton, tolakButton, terimaButton;
-    String idTransaksiIntent, namaPemesanIntent, buktiPembayaranIntent, jamPesanIntent, tanggalPesanIntent, statusPesanIntent, namaLapanganIntent, alasanPesananIntent, UIDMitraIntent, UIDPelangganIntent;
+    String idTransaksiIntent, namaPemesanIntent, buktiPembayaranIntent, jamPesanIntent, tanggalPesanIntent, statusPesanIntent, namaLapanganIntent, alasanPesananIntent, UIDMitraIntent, UIDPelangganIntent, tanggalPesanUserIntent;
     int totalHargaIntent;
     String forUploadText = "belum ada";
     String alasanDefault = "Tidak Ada";
@@ -83,7 +84,7 @@ public class DetailPesananActivity extends AppCompatActivity {
         totalPenghasilanRef = FirebaseDatabase.getInstance().getReference("pesanan_pemilik").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("total_penghasilan");
         readData();
 
-        penggunaRef = FirebaseDatabase.getInstance().getReference("pesanan").child(UIDPelangganIntent).child(tanggalPesanIntent).child("id_pesanan").child(idTransaksiIntent);
+        penggunaRef = FirebaseDatabase.getInstance().getReference("pesanan").child(UIDPelangganIntent).child(tanggalPesanUserIntent).child("id_pesanan").child(idTransaksiIntent);
         pemilikRef = FirebaseDatabase.getInstance().getReference("pesanan_pemilik").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(tanggalPesanIntent).child("id_pesanan").child(idTransaksiIntent);
 
         // membuat tampilan seperti pop up
@@ -244,6 +245,7 @@ public class DetailPesananActivity extends AppCompatActivity {
         alasanPesananIntent = intent.getStringExtra(ALASAN_PESANAN);
         UIDMitraIntent = intent.getStringExtra(UID_MITRA);
         UIDPelangganIntent = intent.getStringExtra(UID_PELANGGAN);
+        tanggalPesanUserIntent = intent.getStringExtra(TANGGAL_PESAN_USER);
         s = n.format(totalHargaIntent);
         a = s.replaceAll(",00", "").replaceAll("Rp", "Rp. ");
     }
