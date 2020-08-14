@@ -30,8 +30,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
+import static com.gelora.mitra.adapter.LapanganAdapter.ID_LAPANGAN;
 import static com.gelora.mitra.adapter.LapanganAdapter.NAMA_LAPANGAN;
 import static com.gelora.mitra.adapter.PesananAdapter.ALASAN_PESANAN;
 import static com.gelora.mitra.adapter.PesananAdapter.BUKTI_PEMBAYARAN;
@@ -49,7 +53,7 @@ public class DetailPesananActivity extends AppCompatActivity {
     TextView idTransaksi, tanggalPesan, waktuPesan, namaPemesan, namaLapangan, totalHarga, statusPesanan;
     ImageView statusIcon;
     Button buktiTransferButton, tolakButton, terimaButton;
-    String idTransaksiIntent, namaPemesanIntent, buktiPembayaranIntent, jamPesanIntent, tanggalPesanIntent, statusPesanIntent, namaLapanganIntent, alasanPesananIntent, UIDMitraIntent, UIDPelangganIntent, tanggalPesanUserIntent;
+    String idTransaksiIntent, namaPemesanIntent, buktiPembayaranIntent, jamPesanIntent, tanggalPesanIntent, statusPesanIntent, namaLapanganIntent, alasanPesananIntent, UIDMitraIntent, UIDPelangganIntent, tanggalPesanUserIntent, idLapanganIntent;
     int totalHargaIntent;
     String forUploadText = "belum ada";
     String alasanDefault = "Tidak Ada";
@@ -178,6 +182,7 @@ public class DetailPesananActivity extends AppCompatActivity {
                             Toast.makeText(DetailPesananActivity.this, "Alasan masih kosong, silakan diisi untuk menolak pesanan", Toast.LENGTH_SHORT).show();
                             return;
                         } else {
+                            setAvailablityLapangan();
                             pemilikRef.child("alasan_status").setValue(statuspesananTolakString);
                             penggunaRef.child("alasan_status").setValue(alasanText);
                             penggunaRef.child("status_pesanan").setValue("Ditolak");
@@ -204,6 +209,17 @@ public class DetailPesananActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setAvailablityLapangan() {
+        DatabaseReference ketersediaanRef;
+        ketersediaanRef = FirebaseDatabase.getInstance().getReference("ketersediaan_lapangan").child(idLapanganIntent).child(tanggalPesanIntent);
+        String[] splitString = jamPesanIntent.split(", ");
+        List<String> jamArrayList = new ArrayList<>();
+        jamArrayList = Arrays.asList(splitString);
+        for (String s : jamArrayList){
+            ketersediaanRef.child(s).setValue("tersedia");
+        }
     }
 
     private void readData() {
@@ -246,6 +262,7 @@ public class DetailPesananActivity extends AppCompatActivity {
         UIDMitraIntent = intent.getStringExtra(UID_MITRA);
         UIDPelangganIntent = intent.getStringExtra(UID_PELANGGAN);
         tanggalPesanUserIntent = intent.getStringExtra(TANGGAL_PESAN_USER);
+        idLapanganIntent = intent.getStringExtra(ID_LAPANGAN);
         s = n.format(totalHargaIntent);
         a = s.replaceAll(",00", "").replaceAll("Rp", "Rp. ");
     }

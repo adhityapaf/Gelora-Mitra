@@ -19,6 +19,7 @@ import com.gelora.mitra.model.PesananData;
 
 import java.util.ArrayList;
 
+import static com.gelora.mitra.adapter.LapanganAdapter.ID_LAPANGAN;
 import static com.gelora.mitra.adapter.LapanganAdapter.NAMA_LAPANGAN;
 
 public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHolder> {
@@ -31,7 +32,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
     public static final String STATUS_PESANAN = "com.gelora.pengguna.status_pesanan";
     public static final String ALASAN_PESANAN = "com.gelora.pengguna.alasan_pesanan";
     public static final String UID_MITRA = "com.gelora.pengguna.uid_mitra";
-    public static final String UID_PELANGGAN = "com.gelora.pengguna.uid_mitra";
+    public static final String UID_PELANGGAN = "com.gelora.pengguna.uid_pelanggan";
     public static final String TANGGAL_PESAN_USER = "com.gelora.pengguna.tanggal_pesan_user";
 
 
@@ -71,6 +72,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
                 intent.putExtra(UID_MITRA, pesananData.get(position).getUid_mitra());
                 intent.putExtra(UID_PELANGGAN, pesananData.get(position).getUid_pengguna());
                 intent.putExtra(TANGGAL_PESAN_USER, pesananData.get(position).getTanggal_pesan_user());
+                intent.putExtra(ID_LAPANGAN, pesananData.get(position).getId_lapangan());
                 mContext.startActivity(intent);
             }
         });
