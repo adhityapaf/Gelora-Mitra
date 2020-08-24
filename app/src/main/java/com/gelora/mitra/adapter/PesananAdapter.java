@@ -2,11 +2,13 @@ package com.gelora.mitra.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +36,8 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
     public static final String UID_MITRA = "com.gelora.pengguna.uid_mitra";
     public static final String UID_PELANGGAN = "com.gelora.pengguna.uid_pelanggan";
     public static final String TANGGAL_PESAN_USER = "com.gelora.pengguna.tanggal_pesan_user";
-
+    public static final String TANGGAL_LAPANGAN_MILLIS = "com.gelora.pengguna.tanggal_lapangan_millis";
+    public static final String TANGGAL_PESAN_USER_MILLIS = "com.gelora.pengguna.tanggal_pesan_user_millis";
 
 
     ArrayList<PesananData> pesananData;
@@ -54,8 +57,19 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final PesananAdapter.ViewHolder holder, final int position) {
+        if (pesananData.get(position).getStatus_pesanan().equals("Sudah Upload Bukti")){
+            holder.orderStatus.setText("Pesanan Baru");
+            holder.orderRow.setBackgroundColor(Color.parseColor("#00E676"));
+        }
+        if (pesananData.get(position).getStatus_pesanan().equals("Diterima")){
+            holder.orderStatus.setText("Diterima");
+            holder.orderStatus.setTextColor(Color.parseColor("#34A853"));
+        }
+        if (pesananData.get(position).getStatus_pesanan().equals("Ditolak")){
+            holder.orderStatus.setText("Ditolak");
+            holder.orderStatus.setTextColor(Color.RED);
+        }
         holder.orderId.setText(pesananData.get(position).getId_pesanan());
-        holder.orderStatus.setText(pesananData.get(position).getStatus_pesanan());
         holder.lihatDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +87,8 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
                 intent.putExtra(UID_PELANGGAN, pesananData.get(position).getUid_pengguna());
                 intent.putExtra(TANGGAL_PESAN_USER, pesananData.get(position).getTanggal_pesan_user());
                 intent.putExtra(ID_LAPANGAN, pesananData.get(position).getId_lapangan());
+                intent.putExtra(TANGGAL_LAPANGAN_MILLIS, pesananData.get(position).getTanggalLapanganMillis());
+                intent.putExtra(TANGGAL_PESAN_USER_MILLIS, pesananData.get(position).getTanggalPesanUserMillis());
                 mContext.startActivity(intent);
             }
         });
@@ -85,11 +101,13 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView orderId, orderStatus, lihatDetail;
+        TableRow orderRow;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             orderId = itemView.findViewById(R.id.orderId);
             orderStatus = itemView.findViewById(R.id.orderStatus);
             lihatDetail = itemView.findViewById(R.id.lihatBukti);
+            orderRow = itemView.findViewById(R.id.orderListRow);
         }
     }
 }

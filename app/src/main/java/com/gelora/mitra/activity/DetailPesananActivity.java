@@ -43,18 +43,21 @@ import static com.gelora.mitra.adapter.PesananAdapter.ID_PESANAN;
 import static com.gelora.mitra.adapter.PesananAdapter.JAM_PESANAN;
 import static com.gelora.mitra.adapter.PesananAdapter.NAMA_PEMESAN;
 import static com.gelora.mitra.adapter.PesananAdapter.STATUS_PESANAN;
+import static com.gelora.mitra.adapter.PesananAdapter.TANGGAL_LAPANGAN_MILLIS;
 import static com.gelora.mitra.adapter.PesananAdapter.TANGGAL_PESANAN;
 import static com.gelora.mitra.adapter.PesananAdapter.TANGGAL_PESAN_USER;
+import static com.gelora.mitra.adapter.PesananAdapter.TANGGAL_PESAN_USER_MILLIS;
 import static com.gelora.mitra.adapter.PesananAdapter.TOTAL_HARGA;
 import static com.gelora.mitra.adapter.PesananAdapter.UID_MITRA;
 import static com.gelora.mitra.adapter.PesananAdapter.UID_PELANGGAN;
 
 public class DetailPesananActivity extends AppCompatActivity {
-    TextView idTransaksi, tanggalPesan, waktuPesan, namaPemesan, namaLapangan, totalHarga, statusPesanan;
+    TextView idTransaksi, tanggalPesan, waktuPesan, namaPemesan, namaLapangan, totalHarga, statusPesanan, jadwalLapanganField;
     ImageView statusIcon;
     Button buktiTransferButton, tolakButton, terimaButton;
     String idTransaksiIntent, namaPemesanIntent, buktiPembayaranIntent, jamPesanIntent, tanggalPesanIntent, statusPesanIntent, namaLapanganIntent, alasanPesananIntent, UIDMitraIntent, UIDPelangganIntent, tanggalPesanUserIntent, idLapanganIntent;
     int totalHargaIntent;
+    long tanggalLapanganMillisIntent, tanggalPesanUserMillisIntent;
     String forUploadText = "belum ada";
     String alasanDefault = "Tidak Ada";
     Locale locale = new Locale("id", "ID");
@@ -66,6 +69,7 @@ public class DetailPesananActivity extends AppCompatActivity {
     long totalpenghasilan = 0;
     DatabaseReference totalPenghasilanRef;
     String alasanText;
+    ImageView backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,30 +86,39 @@ public class DetailPesananActivity extends AppCompatActivity {
         buktiTransferButton = findViewById(R.id.lihatBuktiTransfer_button);
         tolakButton = findViewById(R.id.tolak_button);
         terimaButton = findViewById(R.id.verifikasi_button);
+        backButton = findViewById(R.id.back_arrow);
+        jadwalLapanganField = findViewById(R.id.jadwalLapanganField);
 
         retrieveIntent();
         settingText();
         totalPenghasilanRef = FirebaseDatabase.getInstance().getReference("pesanan_pemilik").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("total_penghasilan");
         readData();
 
-        penggunaRef = FirebaseDatabase.getInstance().getReference("pesanan").child(UIDPelangganIntent).child(tanggalPesanUserIntent).child("id_pesanan").child(idTransaksiIntent);
-        pemilikRef = FirebaseDatabase.getInstance().getReference("pesanan_pemilik").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(tanggalPesanIntent).child("id_pesanan").child(idTransaksiIntent);
+        penggunaRef = FirebaseDatabase.getInstance().getReference("pesanan").child(UIDPelangganIntent).child(String.valueOf(tanggalPesanUserMillisIntent)).child("id_pesanan").child(idTransaksiIntent);
+        pemilikRef = FirebaseDatabase.getInstance().getReference("pesanan_pemilik").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(String.valueOf(tanggalLapanganMillisIntent)).child("id_pesanan").child(idTransaksiIntent);
 
         // membuat tampilan seperti pop up
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
+//        DisplayMetrics dm = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(dm);
+//
+//        int width = dm.widthPixels;
+//        int height = dm.heightPixels;
+//
+//        getWindow().setLayout((int) (width), (int) (height * .7));
+//
+//        WindowManager.LayoutParams params = getWindow().getAttributes();
+//        params.gravity = Gravity.BOTTOM;
+//        params.x = 0;
+//        params.y = 0;
+//
+//        getWindow().setAttributes(params);
 
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-
-        getWindow().setLayout((int) (width), (int) (height * .7));
-
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.gravity = Gravity.BOTTOM;
-        params.x = 0;
-        params.y = 0;
-
-        getWindow().setAttributes(params);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         buktiTransferButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,6 +204,8 @@ public class DetailPesananActivity extends AppCompatActivity {
                             tolakButton.setVisibility(View.INVISIBLE);
                             statusPesanan.setVisibility(View.VISIBLE);
                             statusPesanan.setText(statuspesananTolakString);
+                            statusPesanan.setTextSize(18);
+                            statusPesanan.setTextColor(Color.RED);
                             statusIcon.setVisibility(View.VISIBLE);
                             Glide.with(DetailPesananActivity.this)
                                     .load(R.drawable.ic_ditolak)
@@ -238,7 +253,8 @@ public class DetailPesananActivity extends AppCompatActivity {
 
     private void settingText() {
         idTransaksi.setText(idTransaksiIntent);
-        tanggalPesan.setText(tanggalPesanIntent);
+        tanggalPesan.setText(tanggalPesanUserIntent);
+        jadwalLapanganField.setText(tanggalPesanIntent);
         waktuPesan.setText(jamPesanIntent);
         namaPemesan.setText(namaPemesanIntent);
         namaLapangan.setText(namaLapanganIntent);
@@ -263,6 +279,8 @@ public class DetailPesananActivity extends AppCompatActivity {
         UIDPelangganIntent = intent.getStringExtra(UID_PELANGGAN);
         tanggalPesanUserIntent = intent.getStringExtra(TANGGAL_PESAN_USER);
         idLapanganIntent = intent.getStringExtra(ID_LAPANGAN);
+        tanggalLapanganMillisIntent = intent.getLongExtra(TANGGAL_LAPANGAN_MILLIS,0);
+        tanggalPesanUserMillisIntent = intent.getLongExtra(TANGGAL_PESAN_USER_MILLIS, 0);
         s = n.format(totalHargaIntent);
         a = s.replaceAll(",00", "").replaceAll("Rp", "Rp. ");
     }

@@ -47,7 +47,10 @@ public class PesananFragment extends Fragment {
         mContext = getContext();
         pesananRef = FirebaseDatabase.getInstance().getReference("pesanan_pemilik").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         pesananRecycler.setHasFixedSize(true);
-        pesananRecycler.setLayoutManager(new LinearLayoutManager(mContext));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        pesananRecycler.setLayoutManager(layoutManager);
         readData();
         return view;
     }

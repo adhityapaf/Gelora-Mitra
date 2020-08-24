@@ -20,7 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class TanggalPesananAdapter extends RecyclerView.Adapter<TanggalPesananAdapter.ViewHolder> {
     private static final String TAG = "TanggalPesananAdapter";
@@ -29,6 +33,8 @@ public class TanggalPesananAdapter extends RecyclerView.Adapter<TanggalPesananAd
     Context context;
     DatabaseReference ref;
     String tanggalPesanString;
+    Locale locale = new Locale("id", "ID");
+
 
     public TanggalPesananAdapter(ArrayList<String> tanggalPesanan, Context context) {
         this.tanggalPesanan = tanggalPesanan;
@@ -45,12 +51,15 @@ public class TanggalPesananAdapter extends RecyclerView.Adapter<TanggalPesananAd
 
     @Override
     public void onBindViewHolder(@NonNull final TanggalPesananAdapter.ViewHolder holder, int position) {
-        tanggalPesanString = tanggalPesanan.get(position);
+        DateFormat format = new SimpleDateFormat("EEEEEEE, dd MMMM yyyy", locale);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.parseLong(tanggalPesanan.get(position)));
+        tanggalPesanString = format.format(calendar.getTime());
         holder.tanggalPesanan.setText(tanggalPesanString);
         holder.pesananListRecycler.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true);
         holder.pesananListRecycler.setLayoutManager(linearLayoutManager);
-        ref.child(tanggalPesanString).child("id_pesanan").addValueEventListener(new ValueEventListener() {
+        ref.child(tanggalPesanan.get(position)).child("id_pesanan").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
@@ -71,7 +80,7 @@ public class TanggalPesananAdapter extends RecyclerView.Adapter<TanggalPesananAd
 
             }
         });
-        ref.child(tanggalPesanString).child("id_pesanan").keepSynced(true);
+        ref.child(tanggalPesanan.get(position)).child("id_pesanan").keepSynced(true);
     }
 
     @Override

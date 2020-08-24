@@ -14,8 +14,10 @@ public class PesananData {
     private String uid_pengguna;
     private String tanggal_pesan_user;
     private String id_lapangan;
+    private Long tanggalLapanganMillis;
+    private Long tanggalPesanUserMillis;
 
-    public PesananData(String id_pesanan, String nama_pemesan, int total_harga, String bukti_pembayaran, String jam_pesan, String tanggal_pesan, String status_pesanan, String nama_lapangan, String alasan_status, String uid_mitra, String uid_pengguna, String tanggal_pesan_user, String id_lapangan) {
+    public PesananData(String id_pesanan, String nama_pemesan, int total_harga, String bukti_pembayaran, String jam_pesan, String tanggal_pesan, String status_pesanan, String nama_lapangan, String alasan_status, String uid_mitra, String uid_pengguna, String tanggal_pesan_user, String id_lapangan, Long tanggalLapanganMillis, Long tanggalPesanUserMillis) {
         this.id_pesanan = id_pesanan;
         this.nama_pemesan = nama_pemesan;
         this.total_harga = total_harga;
@@ -29,6 +31,24 @@ public class PesananData {
         this.uid_pengguna = uid_pengguna;
         this.tanggal_pesan_user = tanggal_pesan_user;
         this.id_lapangan = id_lapangan;
+        this.tanggalLapanganMillis = tanggalLapanganMillis;
+        this.tanggalPesanUserMillis = tanggalPesanUserMillis;
+    }
+
+    public Long getTanggalLapanganMillis() {
+        return tanggalLapanganMillis;
+    }
+
+    public void setTanggalLapanganMillis(Long tanggalLapanganMillis) {
+        this.tanggalLapanganMillis = tanggalLapanganMillis;
+    }
+
+    public Long getTanggalPesanUserMillis() {
+        return tanggalPesanUserMillis;
+    }
+
+    public void setTanggalPesanUserMillis(Long tanggalPesanUserMillis) {
+        this.tanggalPesanUserMillis = tanggalPesanUserMillis;
     }
 
     public String getId_lapangan() {

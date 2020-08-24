@@ -20,7 +20,7 @@
             android:theme="@style/AppTheme.DialogPop"
             />
         <activity android:name=".activity.DetailPesananActivity"
-            android:theme="@style/AppTheme.DialogPop"/>
+            />
         <activity
             android:name=".activity.EditLapanganActivity"
             android:screenOrientation="portrait" />
