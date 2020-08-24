@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="96dp"
         android:layout_alignParentTop="true"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/ic_header_mitra_background"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -41,8 +41,8 @@
                 android:layout_width="87dp"
                 android:layout_height="80dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginBottom="-10dp"
-                android:alpha="0.5"
+                android:layout_marginBottom="10dp"
+                android:alpha="1"
                 android:src="@drawable/ic_dashboard"
                 android:tint="@color/putih" />
         </RelativeLayout>
@@ -58,12 +58,17 @@
         <RelativeLayout
             android:id="@+id/dashboard_penghasilan_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/verticalDivider"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button_green_rounded_5dp"
+            >
 
             <ImageView
                 android:id="@+id/rp_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_centerHorizontal="true"
                 android:src="@drawable/ic_rp_green_rounded" />
 
             <TextView
@@ -72,19 +77,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="2dp"
-                android:layout_toEndOf="@id/rp_icon"
-                android:fontFamily="sans-serif-medium"
+                android:layout_below="@id/rp_icon"
+                android:fontFamily="sans-serif"
                 android:text="Penghasilan"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp" />
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/putih"
+                android:textStyle="bold"
+                android:textSize="24sp" />
 
             <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_below="@id/rp_icon"
-                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/penghasilan_label"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="24dp"
-                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardBackgroundColor="@color/putih"
+                android:layout_centerHorizontal="true"
                 app:cardCornerRadius="5dp">
 
                 <TextView
@@ -92,25 +100,40 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="sans-serif-medium"
+                    android:fontFamily="sans-serif"
+                    android:textStyle="bold"
+                    android:paddingStart="54dp"
+                    android:paddingEnd="54dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:gravity="center"
                     android:text="Rp. 150.000,-"
-                    android:textColor="@color/putih"
-                    android:textSize="48sp" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp" />
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
-
+        <View
+            android:layout_width="20dp"
+            android:layout_height="198dp"
+            android:id="@+id/verticalDivider"
+            android:layout_centerHorizontal="true"
+            android:background="@color/putih"
+            android:visibility="invisible"
+            />
         <RelativeLayout
             android:id="@+id/dashboard_lapangan_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/dashboard_penghasilan_layout">
+            android:layout_toStartOf="@id/verticalDivider"
+            android:background="@drawable/button_green_rounded_5dp"
+            >
 
             <ImageView
                 android:id="@+id/lapangan_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_lapangan_green_rounded" />
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/ic_lapangan_green_rounded"
+                android:layout_centerHorizontal="true"/>
 
             <TextView
                 android:id="@+id/lapangan_label"
@@ -118,19 +141,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="2dp"
-                android:layout_toEndOf="@id/lapangan_icon"
+                android:layout_below="@id/lapangan_icon"
+                android:layout_centerHorizontal="true"
                 android:fontFamily="sans-serif-medium"
                 android:text="Lapangan"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp" />
+                android:textColor="@color/putih"
+                android:textSize="24sp" />
 
             <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_below="@id/lapangan_icon"
-                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lapangan_label"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="24dp"
-                app:cardBackgroundColor="@color/colorPrimary"
+                android:layout_centerHorizontal="true"
+                app:cardBackgroundColor="@color/putih"
                 app:cardCornerRadius="5dp">
 
                 <TextView
@@ -140,9 +165,14 @@
                     android:layout_gravity="center"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="40dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textStyle="bold"
                     android:text="1"
-                    android:textColor="@color/putih"
-                    android:textSize="48sp" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp" />
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
 
@@ -150,13 +180,17 @@
             android:id="@+id/dashboard_totalPesanan_layuout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/dashboard_lapangan_layout">
+            android:layout_toEndOf="@id/verticalDivider"
+            android:background="@drawable/button_green_rounded_5dp"
+            >
 
             <ImageView
                 android:id="@+id/totalPesanan_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_pesanan_green_rounded" />
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/ic_pesanan_green_rounded"
+                android:layout_centerHorizontal="true"
+                />
 
             <TextView
                 android:id="@+id/totalPesanan_label"
@@ -164,19 +198,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="2dp"
-                android:layout_toEndOf="@id/totalPesanan_icon"
+                android:layout_below="@id/totalPesanan_icon"
+                android:layout_centerHorizontal="true"
                 android:fontFamily="sans-serif-medium"
-                android:text="Total Pesanan"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp" />
+                android:text="Pesanan"
+                android:textColor="@color/putih"
+                android:textSize="24sp" />
 
             <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_below="@id/totalPesanan_icon"
-                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/totalPesanan_label"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="24dp"
-                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardBackgroundColor="@color/putih"
+                android:layout_centerHorizontal="true"
                 app:cardCornerRadius="5dp">
 
                 <TextView
@@ -186,9 +222,14 @@
                     android:layout_gravity="center"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="center"
+                    android:paddingStart="48dp"
+                    android:paddingEnd="48dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:text="1"
-                    android:textColor="@color/putih"
-                    android:textSize="48sp" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp"
+                    android:textStyle="bold"/>
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
     </RelativeLayout>
