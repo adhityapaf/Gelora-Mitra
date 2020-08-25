@@ -50,7 +50,7 @@
             android:layout_below="@id/emailMitraLabel"
             android:layout_marginTop="8dp"
             android:background="@drawable/green_stroke_rectangle"
-            android:hint="Isikan Email Mitra Anda.."
+            android:hint="Isi Email Mintra Disini.."
             android:inputType="textEmailAddress"
             android:paddingStart="12dp"
             android:paddingEnd="12dp" />
@@ -66,17 +66,24 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/passwordMitraField"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/passwordMitraLabel"
             android:layout_marginTop="8dp"
-            android:background="@drawable/green_stroke_rectangle"
-            android:hint="Isikan Password Mitra Anda.."
-            android:inputType="textPassword"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp" />
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordMitraField"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/green_stroke_rectangle"
+                android:hint="Isi Password Mitra Disini.."
+                android:inputType="textPassword"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/loginSubmitButton"

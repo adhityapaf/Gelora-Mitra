@@ -64,7 +64,7 @@ public class DetailPesananActivity extends AppCompatActivity {
     NumberFormat n = NumberFormat.getCurrencyInstance(locale);
     String s, a;
     DatabaseReference penggunaRef, pemilikRef;
-    String statuspesananTerimaString = "Pesanan Telah di Terima.";
+    String statuspesananTerimaString = "Diterima";
     String statuspesananTolakString = "Pesanan Telah di Tolak.";
     long totalpenghasilan = 0;
     DatabaseReference totalPenghasilanRef;
@@ -203,8 +203,7 @@ public class DetailPesananActivity extends AppCompatActivity {
                             terimaButton.setVisibility(View.INVISIBLE);
                             tolakButton.setVisibility(View.INVISIBLE);
                             statusPesanan.setVisibility(View.VISIBLE);
-                            statusPesanan.setText(statuspesananTolakString);
-                            statusPesanan.setTextSize(18);
+                            statusPesanan.setText("Ditolak");
                             statusPesanan.setTextColor(Color.RED);
                             statusIcon.setVisibility(View.VISIBLE);
                             Glide.with(DetailPesananActivity.this)

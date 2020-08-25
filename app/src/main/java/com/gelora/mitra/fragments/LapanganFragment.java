@@ -87,7 +87,7 @@ public class LapanganFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_lapangan, container, false);
         lapanganKosong = view.findViewById(R.id.text_lapanganKosong);
         lapanganKosongGambar = view.findViewById(R.id.img_tambahkanLapanganKosong);
-        mContext = getContext();
+        mContext = getActivity().getApplicationContext();
         ref = FirebaseDatabase.getInstance().getReference("pemilik_lapangan").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         lapanganRef = FirebaseDatabase.getInstance().getReference("lapangan");
         pemilikRef = FirebaseDatabase.getInstance().getReference("pemilik_lapangan").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -300,7 +300,7 @@ public class LapanganFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
