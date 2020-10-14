@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif"
-            android:text="Gelora"
+            android:text="Salora"
             android:textColor="@color/hitam"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -77,7 +77,7 @@
             android:layout_below="@id/gelora_title_label"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif-light"
-            android:text="Gelanggang Olahraga"
+            android:text="Salam Olahraga"
             android:textColor="@color/hitam"
             android:textSize="18sp" />
 

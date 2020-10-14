@@ -102,7 +102,7 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/passwordMitraField"
+            android:layout_above="@id/loginSubmitButton"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="24dp"
             android:elevation="10dp"
