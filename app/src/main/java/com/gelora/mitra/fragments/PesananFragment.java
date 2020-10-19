@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,6 +37,7 @@ public class PesananFragment extends Fragment {
     Context mContext;
     DatabaseReference pesananRef;
     ArrayList<String> list;
+    TextView pesananKosong;
 
     @Nullable
     @Override
@@ -44,6 +46,7 @@ public class PesananFragment extends Fragment {
         searchBox = view.findViewById(R.id.searchbox_pesanan);
         pesananRecycler = view.findViewById(R.id.pesanan_recycler);
         progressBar = view.findViewById(R.id.progressbarlingkaran);
+        pesananKosong = view.findViewById(R.id.pesanankosong_text);
         mContext = getContext();
         pesananRef = FirebaseDatabase.getInstance().getReference("pesanan_pemilik").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         pesananRecycler.setHasFixedSize(true);
@@ -69,7 +72,13 @@ public class PesananFragment extends Fragment {
                     TanggalPesananAdapter tanggalPesananAdapter = new TanggalPesananAdapter(list, mContext);
                     pesananRecycler.setAdapter(tanggalPesananAdapter);
                     progressBar.setVisibility(View.GONE);
+                    if (list.size() == 0) {
+                        pesananKosong.setVisibility(View.VISIBLE);
+                    } else {
+                        pesananKosong.setVisibility(View.GONE);
+                    }
                 } else {
+                    pesananKosong.setVisibility(View.VISIBLE);
                     Toast.makeText(mContext, "Daftar Pesanan Anda Masih Kosong.", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                 }

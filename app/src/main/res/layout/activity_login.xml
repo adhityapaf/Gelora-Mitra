@@ -50,7 +50,7 @@
             android:layout_below="@id/emailMitraLabel"
             android:layout_marginTop="8dp"
             android:background="@drawable/green_stroke_rectangle"
-            android:hint="Isi Email Mintra Disini.."
+            android:hint="Isi Email Mitra Disini.."
             android:inputType="textEmailAddress"
             android:paddingStart="12dp"
             android:paddingEnd="12dp" />
